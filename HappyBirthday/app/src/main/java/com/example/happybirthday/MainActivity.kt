@@ -1,10 +1,10 @@
 package com.example.happybirthday
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -23,20 +23,20 @@ import androidx.compose.ui.unit.sp
 import com.example.happybirthday.ui.theme.HappyBirthdayTheme
 
 class MainActivity : ComponentActivity() {
-    @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
             HappyBirthdayTheme {
                 Scaffold(
-                    modifier = Modifier.fillMaxSize(),
+                    modifier = Modifier.fillMaxSize()
+                        .border(width = 1.dp, color = Color.Blue),
                     contentColor = MaterialTheme.colorScheme.background,
                     containerColor = Color.LightGray
-                ) {
+                ) { innerPadding ->
                     // A surface container using the 'background' color from the theme
                     GreetingText(
-                        modifier = Modifier.padding(8.dp),
+                        modifier = Modifier.padding(innerPadding),
                         message = "Happy Birthday Raghva!!",
                         from = "From Mallikarjuna"
                     )
@@ -53,9 +53,10 @@ fun GreetingText(
     from: String
 ) {
     Column(
-        modifier = modifier
-            .padding(8.dp),
-        verticalArrangement = Arrangement.Center
+        verticalArrangement = Arrangement.Center,
+        modifier = Modifier
+            .border(width = 2.dp, color = Color.Red)
+            .fillMaxSize()
     ) {
         Text(
             text = message,
