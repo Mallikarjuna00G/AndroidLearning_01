@@ -11,4 +11,5 @@ Link: [Unit 1](https://developer.android.com/courses/android-basics-compose/unit
    1. Project001: [GreetingCard](./GreetingCard)
 3. [Build a basic layout](https://developer.android.com/courses/pathways/android-basics-compose-unit-1-pathway-3)
    1. Project002: [HappyBirthday](./HappyBirthday)
+   2. Project003: [ComposeArticle](./ComposeArticle)
 
