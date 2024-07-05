@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">HappyBirthday</string>
+    <string name="happy_birthday_raghva">Happy Birthday Raghva!!</string>
+    <string name="signature_text">From Mallikarjuna</string>
 </resources>
