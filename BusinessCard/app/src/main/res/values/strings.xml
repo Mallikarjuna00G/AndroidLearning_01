@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">BusinessCard</string>
+    <string name="myName">Mallikarjuna G</string>
+    <string name="title">Junior Android Developer</string>
+    <string name="phoneNumber">+91-9876543210</string>
+    <string name="share">\@AndroidDev</string>
+    <string name="email">me@email.com</string>
+</resources>
