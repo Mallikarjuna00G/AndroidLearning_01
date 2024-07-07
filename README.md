@@ -16,3 +16,10 @@ Link: [Unit 1](https://developer.android.com/courses/android-basics-compose/unit
    4. Project005: [ComposeQuadrant](./ComposeQuadrant)
    5. Project006: [BusinessCard](./BusinessCard)
 
+## Unit 2: Building app UI
+
+Link: [Unit2](https://developer.android.com/courses/android-basics-compose/unit-2)
+
+1. [Kotlin fundamentals](https://developer.android.
+   com/courses/pathways/android-basics-compose-unit-2-pathway-1)
+   1. Learning: Classes and Objects: [KotlinLearning_01](./KotlinLearning_01)
