@@ -64,3 +64,37 @@ Make a choice: 5
 10.0 degrees Fahrenheit is 260.93 degrees Kelvin.
 ====================END====================
 ```
+
+4. **Song Catalog**
+
+```
+1. Learning: Classes and Objects in Kotlin
+2. Learning: Function types and Lambda expressions
+3. Practice: Kotlin Fundamentals: Mobile Notifications
+4. Practice: Kotlin Fundamentals: Movie-ticket price
+5. Practice: Kotlin Fundamentals: Temperature converter
+6. Practice: Kotlin Fundamentals: Song catalog
+7. Practice: Kotlin Fundamentals: Internet profile
+8. Practice: Kotlin Fundamentals: Foldable phones
+9. Practice: Kotlin Fundamentals: Special auction
+-------------------------------------------
+Make a choice: 6
+====================Practice: Kotlin Fundamentals: Song Catalog====================
+Song title: Ene Kannadathi nee Yaake Hingaadthi, 
+	Artist: S. P. Balasubrahmanyam, 
+	Published year: 1996, 
+	Play count: 1000000, 
+	Is popular: true
+Song title: Jwalamukhiya haage ee jeeva beyuthide, 
+	Artist: Shankar Mahadevan, 
+	Published year: 2006, 
+	Play count: 999, 
+	Is popular: false
+Playing song: Jwalamukhiya haage ee jeeva beyuthide
+Song title: Jwalamukhiya haage ee jeeva beyuthide, 
+	Artist: Shankar Mahadevan, 
+	Published year: 2006, 
+	Play count: 1000, 
+	Is popular: true
+====================END====================
+```

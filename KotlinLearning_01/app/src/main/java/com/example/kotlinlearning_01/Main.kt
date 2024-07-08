@@ -380,8 +380,30 @@ fun kotlinFundamentals_SpecialAuction() {
 
 fun kotlinFundamentals_SongCatalog() {
     println("====================Practice: Kotlin Fundamentals: Song Catalog====================")
+    val song1: Song = Song(title = "Ene Kannadathi nee Yaake Hingaadthi", artist = "S. P. Balasubrahmanyam", year = 1996, playCount = 1000000)
+    song1.songDescription()
 
+    val song2: Song = Song(title = "Jwalamukhiya haage ee jeeva beyuthide", artist = "Shankar Mahadevan", year = 2006, playCount = 999)
+    song2.songDescription()
+    song2.playSong()
+    song2.songDescription()
     println("====================END====================")
+}
+
+class Song(val title: String, val artist: String, val year: Int, var playCount: Int) {
+    // Properties
+    var isPopular: Boolean = if (playCount >= 1000) true else false
+    // Methods
+    fun songDescription() {
+        println("Song title: $title, \n\tArtist: $artist, \n\tPublished year: $year, \n\tPlay count: $playCount, \n\tIs popular: $isPopular")
+    }
+    fun playSong() {
+        println("Playing song: $title")
+        playCount++
+        if (playCount >= 1000) {
+            isPopular = true
+        }
+    }
 }
 
 fun kotlinFundamentals_TemperatureConverter() {
