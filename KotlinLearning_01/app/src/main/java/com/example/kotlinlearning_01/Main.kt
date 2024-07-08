@@ -212,97 +212,188 @@ class SmartHome(val smartTvDevice: SmartTvDevice, val smartLightDevice: SmartLig
 
 fun main() {
     val hr_line = "******************************"
-    println("===================CLASSES AND OBJECTS===================")
-    var smartDevice: SmartDevice = SmartTvDevice("Android TV", "Entertainment")
-    smartDevice.turnOn()
+    val theList: MutableList<String> = mutableListOf<String>()
+    initList(theList)
+    var choice = choiceFromList(theList)
 
-    smartDevice = SmartLightDevice("Google Light", "Utility")
-    smartDevice.turnOn()
+    when(choice) {
+        1 -> {
+            println("===================CLASSES AND OBJECTS===================")
+            var smartDevice: SmartDevice = SmartTvDevice("Android TV", "Entertainment")
+            smartDevice.turnOn()
 
-    var smartHome = SmartHome(smartTvDevice = SmartTvDevice("Android TV", "Entertainment"), smartLightDevice = SmartLightDevice("Google Light", "Utility"))
+            smartDevice = SmartLightDevice("Google Light", "Utility")
+            smartDevice.turnOn()
 
-    println(hr_line)
-    smartHome.turnOffAllDevices()
-    println(hr_line)
-    smartHome.printSmartTvInfo()
-    smartHome.printSmartLightInfo()
-    println(hr_line)
-    smartHome.turnOnTv()
-    smartHome.increaseTvVolume()
-    smartHome.changeTvChannelToNext()
-    println(hr_line)
-    smartHome.decreaseTvVolume()
-    smartHome.changeTvChannelToPrevious()
-    smartHome.turnOnTv()
-    smartHome.turnOffTv()
-    smartHome.changeTvChannelToPrevious()
-    println(hr_line)
+            var smartHome = SmartHome(smartTvDevice = SmartTvDevice("Android TV", "Entertainment"), smartLightDevice = SmartLightDevice("Google Light", "Utility"))
 
-    smartHome.turnOnLight()
-    smartHome.increaseLightBrightness()
-    println(hr_line)
-    smartHome.decreaseLightBrightness()
-    smartHome.turnOnLight()
-    smartHome.turnOffLight()
-    smartHome.increaseLightBrightness()
+            println(hr_line)
+            smartHome.turnOffAllDevices()
+            println(hr_line)
+            smartHome.printSmartTvInfo()
+            smartHome.printSmartLightInfo()
+            println(hr_line)
+            smartHome.turnOnTv()
+            smartHome.increaseTvVolume()
+            smartHome.changeTvChannelToNext()
+            println(hr_line)
+            smartHome.decreaseTvVolume()
+            smartHome.changeTvChannelToPrevious()
+            smartHome.turnOnTv()
+            smartHome.turnOffTv()
+            smartHome.changeTvChannelToPrevious()
+            println(hr_line)
 
-    println(hr_line)
-    smartHome.turnOffAllDevices()
+            smartHome.turnOnLight()
+            smartHome.increaseLightBrightness()
+            println(hr_line)
+            smartHome.decreaseLightBrightness()
+            smartHome.turnOnLight()
+            smartHome.turnOffLight()
+            smartHome.increaseLightBrightness()
 
-    println("===================END===================")
-    println("===================FUNCTION TYPES AND LAMBDAS==================")
-    println("=====> Function in variable")
-    val trickFunction = ::trick    // function reference. Do not include parentheses after 'trick' because you want to store the function in a variable, not call the function.
-        // instead user the function reference operator (::)
-    trickFunction()
-    println("=====> Lambda Expression")
-    val trick2Function = trick2    // Here we do not need funtion reference operator (::) as it is a lambda expression.
-    trick2()    // Parenthese necessary
-    trick2Function()
-    println("=====> Function as a data type")
-    val trick3Function: () -> Unit = trick3
-    trick3Function()
-    treat()
-    println("=====> Use function as a return type")
-    var trickOrTreatFunction = trickOrTreat(isTrick = true)
-    trickOrTreatFunction()
-    trickOrTreatFunction = trickOrTreat(isTrick = false)
-    trickOrTreatFunction()
-    println("=====> Pass function as an argument to other functions")
-    // declare variable of type function "(Int) -> String"
-    // Notice the initialization here. 'quantity' is of type Int and
-    // '"$quantity quarters"' is of type String.
-    val coins: (Int) -> String = {quantity -> "$quantity quarters"}
-    val cupCake: (Int) -> String = {"Have a cupcake"} // Int argument is ignored as we are not using it in the string.
+            println(hr_line)
+            smartHome.turnOffAllDevices()
 
-    val trickOrTreat2Function = trickOrTreat2(isTrick = true, extraTreat = cupCake)
-    trickOrTreat2Function()
-    val trickOrTreat2Function2 = trickOrTreat2(isTrick = false, extraTreat = coins)
-    trickOrTreat2Function2()
-    println("=====> Nullable function types")
-    val trickOrTreat3Function = trickOrTreat3(isTrick = false, extraTreat = coins)
-    trickOrTreat3Function()
-    // Pass 'null' instead of 'coins' or 'cupCake' to trickOrTreat3Function2
-    val trickOrTreat3Function2 = trickOrTreat3(isTrick = false, extraTreat = null)
-    trickOrTreat3Function2()
-    println("=====> SHORTHAND: Omit parameter name")
-    val coins2: (Int) -> String = {"$it quarters"}    // The Int argument, if we are using, can be referenced using 'it' keyword
-    val trickOrTreat2Function3 = trickOrTreat2(isTrick = false, extraTreat = coins2)
-    trickOrTreat2Function3()
-    println("=====> SHORTHAND: Pass lambda expression directly into function")
-    val trickOrTreat2Function4 = trickOrTreat2(isTrick = false, {"$it quarters"})
-    trickOrTreat2Function4()
-    println("=====> SHORTHAND: Use trailing lambda syntax")
-    // When a function type is the last parameter of a function you can place the lambda expression
-    // after the closing parenthesis to call the function.
-    val trickOrTreat2Function5 = trickOrTreat2(isTrick = false) { "$it quarters" }
-    trickOrTreat2Function5()
-    println("=====> repeat function")
-    repeat(times = 3) {
-        println("Hello")
-        trickOrTreatFunction()
+            println("===================END===================")
+        }
+        2 -> {
+            println("===================FUNCTION TYPES AND LAMBDAS==================")
+            println("=====> Function in variable")
+            val trickFunction = ::trick    // function reference. Do not include parentheses after 'trick' because you want to store the function in a variable, not call the function.
+            // instead user the function reference operator (::)
+            trickFunction()
+            println("=====> Lambda Expression")
+            val trick2Function = trick2    // Here we do not need funtion reference operator (::) as it is a lambda expression.
+            trick2()    // Parenthese necessary
+            trick2Function()
+            println("=====> Function as a data type")
+            val trick3Function: () -> Unit = trick3
+            trick3Function()
+            treat()
+            println("=====> Use function as a return type")
+            var trickOrTreatFunction = trickOrTreat(isTrick = true)
+            trickOrTreatFunction()
+            trickOrTreatFunction = trickOrTreat(isTrick = false)
+            trickOrTreatFunction()
+            println("=====> Pass function as an argument to other functions")
+            // declare variable of type function "(Int) -> String"
+            // Notice the initialization here. 'quantity' is of type Int and
+            // '"$quantity quarters"' is of type String.
+            val coins: (Int) -> String = {quantity -> "$quantity quarters"}
+            val cupCake: (Int) -> String = {"Have a cupcake"} // Int argument is ignored as we are not using it in the string.
+
+            val trickOrTreat2Function = trickOrTreat2(isTrick = true, extraTreat = cupCake)
+            trickOrTreat2Function()
+            val trickOrTreat2Function2 = trickOrTreat2(isTrick = false, extraTreat = coins)
+            trickOrTreat2Function2()
+            println("=====> Nullable function types")
+            val trickOrTreat3Function = trickOrTreat3(isTrick = false, extraTreat = coins)
+            trickOrTreat3Function()
+            // Pass 'null' instead of 'coins' or 'cupCake' to trickOrTreat3Function2
+            val trickOrTreat3Function2 = trickOrTreat3(isTrick = false, extraTreat = null)
+            trickOrTreat3Function2()
+            println("=====> SHORTHAND: Omit parameter name")
+            val coins2: (Int) -> String = {"$it quarters"}    // The Int argument, if we are using, can be referenced using 'it' keyword
+            val trickOrTreat2Function3 = trickOrTreat2(isTrick = false, extraTreat = coins2)
+            trickOrTreat2Function3()
+            println("=====> SHORTHAND: Pass lambda expression directly into function")
+            val trickOrTreat2Function4 = trickOrTreat2(isTrick = false, {"$it quarters"})
+            trickOrTreat2Function4()
+            println("=====> SHORTHAND: Use trailing lambda syntax")
+            // When a function type is the last parameter of a function you can place the lambda expression
+            // after the closing parenthesis to call the function.
+            val trickOrTreat2Function5 = trickOrTreat2(isTrick = false) { "$it quarters" }
+            trickOrTreat2Function5()
+            println("=====> repeat function")
+            repeat(times = 3) {
+                println("Hello")
+                trickOrTreatFunction()
+            }
+            println("===================END===================")
+        }
+        3 -> {
+            kotlinFundamentals_MobileNotifications()
+        }
+        4 -> {
+            kotlinFundamentals_MovieTicketPrice()
+        }
+        5 -> {
+            kotlinFundamentals_TemperatureConverter()
+        }
+        6 -> {
+            kotlinFundamentals_SongCatalog()
+        }
+        7 -> {
+            kotlinFundamentals_InternetProfile()
+        }
+        8 -> {
+            kotlinFundamentals_FoldablePhones()
+        }
+        9 -> {
+            kotlinFundamentals_SpecialAuction()
+        }
+        else -> {
+            println("Invalid choice. Bye")
+        }
     }
-    println("===================END===================")
+
+
+
+}
+
+fun kotlinFundamentals_MobileNotifications() {
+    println("====================Practice: Kotlin Fundamentals: Mobile Notifications====================")
+    val morningNotification = 51
+    val eveningNotification = 135
+
+    printNotificationSummary(morningNotification)
+    printNotificationSummary(eveningNotification)
+    println("====================END====================")
+}
+
+fun printNotificationSummary(numberOfMessages: Int) {
+    if(numberOfMessages < 100) {
+        println("You have $numberOfMessages notifications.")
+    } else {
+        println("Your phone is blowing up! You have 99+ notifications.")
+    }
+}
+
+fun kotlinFundamentals_InternetProfile() {
+    println("====================Practice: Kotlin Fundamentals: Internet Profile====================")
+
+    println("====================END====================")
+}
+
+fun kotlinFundamentals_FoldablePhones() {
+    println("====================Practice: Kotlin Fundamentals: Foldable Phones====================")
+
+    println("====================END====================")
+}
+
+fun kotlinFundamentals_SpecialAuction() {
+    println("====================Practice: Kotlin Fundamentals: Special Auction====================")
+
+    println("====================END====================")
+}
+
+fun kotlinFundamentals_SongCatalog() {
+    println("====================Practice: Kotlin Fundamentals: Song Catalog====================")
+
+    println("====================END====================")
+}
+
+fun kotlinFundamentals_TemperatureConverter() {
+    println("====================Practice: Kotlin Fundamentals: Temperature Converter====================")
+
+    println("====================END====================")
+}
+
+fun kotlinFundamentals_MovieTicketPrice() {
+    println("====================Practice: Kotlin Fundamentals: Movie Ticket Price====================")
+
+    println("====================END====================")
 }
 
 fun trick() {
@@ -381,3 +472,34 @@ fun trickOrTreat3(isTrick: Boolean, extraTreat: ((Int) -> String)?): () -> Unit 
  * repeat() is a higher-order function.
  * repeat function signature: repeat(times: Int, action: (Int) -> Unit): Unit
  */
+
+fun choiceFromList(theList: MutableList<String>): Int {
+    for (i in theList.indices) {
+        println("${i + 1}. ${theList[i]}")
+    }
+    println("-------------------------------------------")
+    print("Make a choice: ")
+    val input = readLine()?.toInt()
+
+    if (input != null &&  input in 1..theList.size) {
+        return input
+    }else {
+        return 0
+    }
+}
+
+fun initList(theList: MutableList<String>) {
+    theList.addAll(
+        listOf(
+            "Learning: Classes and Objects in Kotlin",
+            "Learning: Function types and Lambda expressions",
+            "Practice: Kotlin Fundamentals: Mobile Notifications",
+            "Practice: Kotlin Fundamentals: Movie-ticket price",
+            "Practice: Kotlin Fundamentals: Temperature converter",
+            "Practice: Kotlin Fundamentals: Song catalog",
+            "Practice: Kotlin Fundamentals: Internet profile",
+            "Practice: Kotlin Fundamentals: Foldable phones",
+            "Practice: Kotlin Fundamentals: Special auction"
+        )
+    )
+}

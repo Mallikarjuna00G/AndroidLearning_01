@@ -24,3 +24,5 @@ Link: [Unit2](https://developer.android.com/courses/android-basics-compose/unit-
    com/courses/pathways/android-basics-compose-unit-2-pathway-1)
    1. Learning: Classes and Objects: [KotlinLearning_01](./KotlinLearning_01)
    2. Learning: Function types and Lambda expressions in Kotlin: [KotlinLearning_01](./KotlinLearning_01)
+   3. [Practice: Kotlin Fundamentals](https://developer.android.com/codelabs/basic-android-kotlin-compose-kotlin-fundamentals-practice-problems?continue=https%3A%2F%2Fdeveloper.android.com%2Fcourses%2Fpathways%2Fandroid-basics-compose-unit-2-pathway-1%23codelab-https%3A%2F%2Fdeveloper.android.com%2Fcodelabs%2Fbasic-android-kotlin-compose-kotlin-fundamentals-practice-problems): [KotlinLearning_01](./KotlinLearning_01)
+   4. 
