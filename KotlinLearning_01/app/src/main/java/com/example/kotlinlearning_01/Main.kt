@@ -212,6 +212,7 @@ class SmartHome(val smartTvDevice: SmartTvDevice, val smartLightDevice: SmartLig
 
 fun main() {
     val hr_line = "******************************"
+    println("===================CLASSES AND OBJECTS===================")
     var smartDevice: SmartDevice = SmartTvDevice("Android TV", "Entertainment")
     smartDevice.turnOn()
 
@@ -247,4 +248,136 @@ fun main() {
 
     println(hr_line)
     smartHome.turnOffAllDevices()
+
+    println("===================END===================")
+    println("===================FUNCTION TYPES AND LAMBDAS==================")
+    println("=====> Function in variable")
+    val trickFunction = ::trick    // function reference. Do not include parentheses after 'trick' because you want to store the function in a variable, not call the function.
+        // instead user the function reference operator (::)
+    trickFunction()
+    println("=====> Lambda Expression")
+    val trick2Function = trick2    // Here we do not need funtion reference operator (::) as it is a lambda expression.
+    trick2()    // Parenthese necessary
+    trick2Function()
+    println("=====> Function as a data type")
+    val trick3Function: () -> Unit = trick3
+    trick3Function()
+    treat()
+    println("=====> Use function as a return type")
+    var trickOrTreatFunction = trickOrTreat(isTrick = true)
+    trickOrTreatFunction()
+    trickOrTreatFunction = trickOrTreat(isTrick = false)
+    trickOrTreatFunction()
+    println("=====> Pass function as an argument to other functions")
+    // declare variable of type function "(Int) -> String"
+    // Notice the initialization here. 'quantity' is of type Int and
+    // '"$quantity quarters"' is of type String.
+    val coins: (Int) -> String = {quantity -> "$quantity quarters"}
+    val cupCake: (Int) -> String = {"Have a cupcake"} // Int argument is ignored as we are not using it in the string.
+
+    val trickOrTreat2Function = trickOrTreat2(isTrick = true, extraTreat = cupCake)
+    trickOrTreat2Function()
+    val trickOrTreat2Function2 = trickOrTreat2(isTrick = false, extraTreat = coins)
+    trickOrTreat2Function2()
+    println("=====> Nullable function types")
+    val trickOrTreat3Function = trickOrTreat3(isTrick = false, extraTreat = coins)
+    trickOrTreat3Function()
+    // Pass 'null' instead of 'coins' or 'cupCake' to trickOrTreat3Function2
+    val trickOrTreat3Function2 = trickOrTreat3(isTrick = false, extraTreat = null)
+    trickOrTreat3Function2()
+    println("=====> SHORTHAND: Omit parameter name")
+    val coins2: (Int) -> String = {"$it quarters"}    // The Int argument, if we are using, can be referenced using 'it' keyword
+    val trickOrTreat2Function3 = trickOrTreat2(isTrick = false, extraTreat = coins2)
+    trickOrTreat2Function3()
+    println("=====> SHORTHAND: Pass lambda expression directly into function")
+    val trickOrTreat2Function4 = trickOrTreat2(isTrick = false, {"$it quarters"})
+    trickOrTreat2Function4()
+    println("=====> SHORTHAND: Use trailing lambda syntax")
+    // When a function type is the last parameter of a function you can place the lambda expression
+    // after the closing parenthesis to call the function.
+    val trickOrTreat2Function5 = trickOrTreat2(isTrick = false) { "$it quarters" }
+    trickOrTreat2Function5()
+    println("=====> repeat function")
+    repeat(times = 3) {
+        println("Hello")
+        trickOrTreatFunction()
+    }
+    println("===================END===================")
 }
+
+fun trick() {
+    println("trick| No treats!")
+}
+
+/** With lambda expressions, you can create variables that store functions,
+ *call these variables like functions, and store them in other variables that you can call like functions.
+ * This is called anonymous functions.
+ */
+// For demonstrating lambda expression
+val trick2 = {
+    println("trick2| No treats!")
+}
+
+// For demonstrating function as a data type
+// Similar to how we explicitly mention the data type for a variable (ex. "val var1: Int = 10"),
+// we can also explicitly mention the data type for a function, which we call it function type.
+// The format of the function type will be "(input parameters types) -> (function return type)"
+// trick3 lambda expression actually does not take any argument and returns nothing. Therefore,
+// the function type is "() -> Unit". If it were to have two parameters (say Int and String) and a non-Unit return type,
+// (say Int), then the function type would be "(Int, String) -> Int".
+val trick3: () -> Unit = {
+    println("trick3| No treats!")
+}
+
+val treat: () -> Unit = {
+    println("treat| Have a Treat!")
+}
+
+/** Use Function as a return type
+ * A function is a data type, so you can use it like any other data type.
+ * We can return functions from other functions.
+ *
+ */
+
+fun trickOrTreat(isTrick: Boolean): () -> Unit {
+    if (isTrick) {
+        return trick2
+    }
+    return treat
+}
+
+/** Pass Function as an argument to other functions
+ * Similar to isTrick variable being a Boolean data type,
+ * extraTreat is a variable of Function type (Int) -> String.
+ */
+fun trickOrTreat2(isTrick: Boolean, extraTreat: (Int) -> String): () -> Unit {
+    if (isTrick) {
+        return trick2    // Returning the type "() -> Unit".
+    } else {
+        println(extraTreat(5))
+        return treat    // Returning the type "() -> Unit".
+    }
+}
+
+/** Nullable function types
+ * Similar to known nullable data types we can write the nullable function types for functions.
+ * val var1: Int? = 10
+ * val func1: ((Int) -> String)? = {null}
+ */
+fun trickOrTreat3(isTrick: Boolean, extraTreat: ((Int) -> String)?): () -> Unit {
+    if (isTrick) {
+        return trick2    // Returning the type "() -> Unit".
+    } else {
+        if (extraTreat != null) {
+            println(extraTreat(5))
+        }
+        return treat    // Returning the type "() -> Unit".
+    }
+}
+
+/** The repeat() function
+ * When a function returns a function or takes a function as an argument, it is called as higher-order function.
+ * trickOrTreat is an example of higher-order function.
+ * repeat() is a higher-order function.
+ * repeat function signature: repeat(times: Int, action: (Int) -> Unit): Unit
+ */

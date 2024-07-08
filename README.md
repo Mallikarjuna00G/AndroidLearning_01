@@ -23,3 +23,4 @@ Link: [Unit2](https://developer.android.com/courses/android-basics-compose/unit-
 1. [Kotlin fundamentals](https://developer.android.
    com/courses/pathways/android-basics-compose-unit-2-pathway-1)
    1. Learning: Classes and Objects: [KotlinLearning_01](./KotlinLearning_01)
+   2. Learning: Function types and Lambda expressions in Kotlin: [KotlinLearning_01](./KotlinLearning_01)
