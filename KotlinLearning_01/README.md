@@ -23,7 +23,7 @@ Your phone is blowing up! You have 99+ notifications.
 ====================END====================
 ```
 
-2. Movie-ticket price
+2. **Movie-ticket price**
 
 ```
 1. Learning: Classes and Objects in Kotlin
@@ -41,5 +41,26 @@ Make a choice: 4
 The movie ticket price for a person aged 5 is $15.
 The movie ticket price for a person aged 28 is $25.
 The movie ticket price for a person aged 87 is $20.
+====================END====================
+```
+
+3. **Temperature converter**
+
+```
+1. Learning: Classes and Objects in Kotlin
+2. Learning: Function types and Lambda expressions
+3. Practice: Kotlin Fundamentals: Mobile Notifications
+4. Practice: Kotlin Fundamentals: Movie-ticket price
+5. Practice: Kotlin Fundamentals: Temperature converter
+6. Practice: Kotlin Fundamentals: Song catalog
+7. Practice: Kotlin Fundamentals: Internet profile
+8. Practice: Kotlin Fundamentals: Foldable phones
+9. Practice: Kotlin Fundamentals: Special auction
+-------------------------------------------
+Make a choice: 5
+====================Practice: Kotlin Fundamentals: Temperature Converter====================
+27.0 degrees Celsius is 80.60 degrees Fahrenheit.
+350.0 degrees Kelvin is 76.85 degrees Celsius.
+10.0 degrees Fahrenheit is 260.93 degrees Kelvin.
 ====================END====================
 ```
