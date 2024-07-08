@@ -98,3 +98,37 @@ Song title: Jwalamukhiya haage ee jeeva beyuthide,
 	Is popular: true
 ====================END====================
 ```
+
+5. **Internet Profile:**
+
+```
+1. Learning: Classes and Objects in Kotlin
+2. Learning: Function types and Lambda expressions
+3. Practice: Kotlin Fundamentals: Mobile Notifications
+4. Practice: Kotlin Fundamentals: Movie-ticket price
+5. Practice: Kotlin Fundamentals: Temperature converter
+6. Practice: Kotlin Fundamentals: Song catalog
+7. Practice: Kotlin Fundamentals: Internet profile
+8. Practice: Kotlin Fundamentals: Foldable phones
+9. Practice: Kotlin Fundamentals: Special auction
+-------------------------------------------
+Make a choice: 7
+====================Practice: Kotlin Fundamentals: Internet Profile====================
+
+Name: Amanda
+Age: 33
+Likes to play tennis. Does not have a referrer.
+
+Name: Atiqah
+Age: 28
+Likes to climb. Has a referrer named Amanda, who likes to play tennis.
+
+Name: Puneeth
+Age: 31
+No hobbies... Does not have a referrer.
+
+Name: Shivaraj
+Age: 50
+No hobbies... Has a referrer named Puneeth, who does not have a hobby either.
+====================END====================
+```

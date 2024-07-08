@@ -362,8 +362,34 @@ fun printNotificationSummary(numberOfMessages: Int) {
 
 fun kotlinFundamentals_InternetProfile() {
     println("====================Practice: Kotlin Fundamentals: Internet Profile====================")
-
+    val amanda = Person("Amanda", 33, "play tennis", null)
+    amanda.showProfile()
+    val atiqah = Person("Atiqah", 28, "climb", Person("Amanda", 33, "play tennis", null))
+    atiqah.showProfile()
+    val puneeth = Person("Puneeth", 31, null, null)
+    puneeth.showProfile()
+    val shivaraj = Person("Shivaraj", 50, null, puneeth)
+    shivaraj.showProfile()
     println("====================END====================")
+}
+
+class Person(val name: String, val age: Int, val hobby: String?, val referrer: Person?) {
+    // Methods
+    fun showProfile() {
+        println("\nName: $name")
+        println("Age: $age")
+        if (hobby != null) {
+            print("Likes to $hobby.")
+        } else {
+            print("No hobbies...")
+        }
+        print(" ")
+        if (referrer != null) {
+            println("Has a referrer named ${referrer.name}, who ${if (referrer.hobby != null) "likes to ${referrer.hobby}" else "does not have a hobby either"}.")
+        } else {
+            println("Does not have a referrer.")
+        }
+    }
 }
 
 fun kotlinFundamentals_FoldablePhones() {
