@@ -394,8 +394,47 @@ class Person(val name: String, val age: Int, val hobby: String?, val referrer: P
 
 fun kotlinFundamentals_FoldablePhones() {
     println("====================Practice: Kotlin Fundamentals: Foldable Phones====================")
-
+    val foldablePhone: FoldablePhone = FoldablePhone(isFolded = true)
+    foldablePhone.checkPhoneScreenLightOn()
+    foldablePhone.unfold()
+    foldablePhone.checkPhoneScreenLightOn()
+    foldablePhone.fold()
+    foldablePhone.switchOn()
+    foldablePhone.checkPhoneScreenLightOn()
+    foldablePhone.unfold()
+    foldablePhone.switchOn()
+    foldablePhone.checkPhoneScreenLightOn()
     println("====================END====================")
+}
+
+open class Phone(var isScreenLightOn: Boolean = false) {
+    // Methods
+    open fun switchOn() {
+        isScreenLightOn = true
+    }
+    fun switchOff() {
+        isScreenLightOn = false
+    }
+    fun checkPhoneScreenLightOn() {
+        val phoneScreenLight = if (isScreenLightOn) "on" else "off"
+        println("The phone screen's light is $phoneScreenLight.")
+    }
+}
+
+class FoldablePhone(var isFolded: Boolean = true): Phone(false) {
+    // Methods
+    fun fold() {
+        isFolded = true
+        switchOff()
+    }
+    fun unfold() {
+        isFolded = false
+    }
+    override fun switchOn() {
+        if (!isFolded) {
+            super.switchOn()
+        }
+    }
 }
 
 fun kotlinFundamentals_SpecialAuction() {

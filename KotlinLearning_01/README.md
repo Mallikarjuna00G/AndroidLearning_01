@@ -132,3 +132,25 @@ Age: 50
 No hobbies... Has a referrer named Puneeth, who does not have a hobby either.
 ====================END====================
 ```
+
+6. **Foldable Phones:**
+
+```
+1. Learning: Classes and Objects in Kotlin
+2. Learning: Function types and Lambda expressions
+3. Practice: Kotlin Fundamentals: Mobile Notifications
+4. Practice: Kotlin Fundamentals: Movie-ticket price
+5. Practice: Kotlin Fundamentals: Temperature converter
+6. Practice: Kotlin Fundamentals: Song catalog
+7. Practice: Kotlin Fundamentals: Internet profile
+8. Practice: Kotlin Fundamentals: Foldable phones
+9. Practice: Kotlin Fundamentals: Special auction
+-------------------------------------------
+Make a choice: 8
+====================Practice: Kotlin Fundamentals: Foldable Phones====================
+The phone screen's light is off.
+The phone screen's light is off.
+The phone screen's light is off.
+The phone screen's light is on.
+====================END====================
+```
