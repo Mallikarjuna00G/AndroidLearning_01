@@ -354,7 +354,7 @@ fun kotlinFundamentals_MobileNotifications() {
 
 fun printNotificationSummary(numberOfMessages: Int) {
     if(numberOfMessages < 100) {
-        println("You have $numberOfMessages notifications.")
+        println("You have ${numberOfMessages} notifications.")
     } else {
         println("Your phone is blowing up! You have 99+ notifications.")
     }
@@ -395,15 +395,15 @@ class Person(val name: String, val age: Int, val hobby: String?, val referrer: P
 fun kotlinFundamentals_FoldablePhones() {
     println("====================Practice: Kotlin Fundamentals: Foldable Phones====================")
     val foldablePhone: FoldablePhone = FoldablePhone(isFolded = true)
-    foldablePhone.checkPhoneScreenLightOn()
+    foldablePhone.checkPhoneScreenLight()
     foldablePhone.unfold()
-    foldablePhone.checkPhoneScreenLightOn()
+    foldablePhone.checkPhoneScreenLight()
     foldablePhone.fold()
     foldablePhone.switchOn()
-    foldablePhone.checkPhoneScreenLightOn()
+    foldablePhone.checkPhoneScreenLight()
     foldablePhone.unfold()
     foldablePhone.switchOn()
-    foldablePhone.checkPhoneScreenLightOn()
+    foldablePhone.checkPhoneScreenLight()
     println("====================END====================")
 }
 
@@ -415,7 +415,7 @@ open class Phone(var isScreenLightOn: Boolean = false) {
     fun switchOff() {
         isScreenLightOn = false
     }
-    fun checkPhoneScreenLightOn() {
+    fun checkPhoneScreenLight() {
         val phoneScreenLight = if (isScreenLightOn) "on" else "off"
         println("The phone screen's light is $phoneScreenLight.")
     }
@@ -456,22 +456,23 @@ fun auctionPrice(bid: Bid?, minimumPrice: Int): Int {
 
 fun kotlinFundamentals_SongCatalog() {
     println("====================Practice: Kotlin Fundamentals: Song Catalog====================")
-    val song1: Song = Song(title = "Ene Kannadathi nee Yaake Hingaadthi", artist = "S. P. Balasubrahmanyam", year = 1996, playCount = 1000000)
+    val song1: Song = Song(title = "Ene Kannadathi nee Yaake Hingaadthi", artist = "S. P. Balasubrahmanyam", yearPublished = 1996, playCount = 1000000)
     song1.songDescription()
 
-    val song2: Song = Song(title = "Jwalamukhiya haage ee jeeva beyuthide", artist = "Shankar Mahadevan", year = 2006, playCount = 999)
+    val song2: Song = Song(title = "Jwalamukhiya haage ee jeeva beyuthide", artist = "Shankar Mahadevan", yearPublished = 2006, playCount = 999)
     song2.songDescription()
     song2.playSong()
     song2.songDescription()
     println("====================END====================")
 }
 
-class Song(val title: String, val artist: String, val year: Int, var playCount: Int) {
+class Song(val title: String, val artist: String, val yearPublished: Int, var playCount: Int) {
     // Properties
     var isPopular: Boolean = if (playCount >= 1000) true else false
+    // we can also write get() = (playCount >= 1000)
     // Methods
     fun songDescription() {
-        println("Song title: $title, \n\tArtist: $artist, \n\tPublished year: $year, \n\tPlay count: $playCount, \n\tIs popular: $isPopular")
+        println("Song title: $title, \n\tArtist: $artist, \n\tPublished year: $yearPublished, \n\tPlay count: $playCount, \n\tIs popular: $isPopular")
     }
     fun playSong() {
         println("Playing song: $title")
@@ -510,16 +511,11 @@ fun kotlinFundamentals_MovieTicketPrice() {
 }
 
 fun ticketPrice(age: Int, isMonday: Boolean): Int {
-    if(age <= 12) {
-        return 15
-    } else if(age in 13..60 && isMonday) {
-        return 25
-    } else if(age in 13..60) {
-        return 30
-    } else if(age in 61..100) {
-        return 20
-    } else {
-        return -1
+    return when(age) {
+        in 0..12 -> 15
+        in 13..60 -> if (isMonday) 25 else 30
+        in 61..100 -> 20
+        else -> -1
     }
 }
 
