@@ -154,3 +154,23 @@ The phone screen's light is off.
 The phone screen's light is on.
 ====================END====================
 ```
+
+7. **Special Auction:**
+
+```
+1. Learning: Classes and Objects in Kotlin
+2. Learning: Function types and Lambda expressions
+3. Practice: Kotlin Fundamentals: Mobile Notifications
+4. Practice: Kotlin Fundamentals: Movie-ticket price
+5. Practice: Kotlin Fundamentals: Temperature converter
+6. Practice: Kotlin Fundamentals: Song catalog
+7. Practice: Kotlin Fundamentals: Internet profile
+8. Practice: Kotlin Fundamentals: Foldable phones
+9. Practice: Kotlin Fundamentals: Special auction
+-------------------------------------------
+Make a choice: 9
+====================Practice: Kotlin Fundamentals: Special Auction====================
+Item A is sold at 5000.
+Item B is sold at 3000.
+====================END====================
+```
