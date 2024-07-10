@@ -27,3 +27,5 @@ Link: [Unit2](https://developer.android.com/courses/android-basics-compose/unit-
 2. [Add a button to an app](https://developer.android.com/courses/pathways/android-basics-compose-unit-2-pathway-2)
    1. Project007: [DiceRoller](./DiceRoller)
    2. Project008: [Practice: Lemonade](./Lemonade)
+3. [Interacting with UI and state](https://developer.android.com/courses/pathways/android-basics-compose-unit-2-pathway-3?authuser=1)
+   1. Project009: [TipCalculator](./TipCalculator)
