@@ -10,6 +10,13 @@ class King(
     private val kaala: String = "",
     private val avadhi: String = "") {
 
+    fun getNameEn(): String { return nameEn }
+    fun getName(): String { return name }
+    fun getOtherNames(): String { return otherNames }
+    fun getEmpire(): String { return empire }
+    fun getKaala(): String { return kaala }
+    fun getAvadhi(): String { return avadhi }
+
     fun printStringResource() {
         println("<string name=\"$nameEn\">$name</string>")
         println("<string name=\"${nameEn + "_OtherNames"}\">($otherNames)</string>")

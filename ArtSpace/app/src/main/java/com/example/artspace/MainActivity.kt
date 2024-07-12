@@ -25,6 +25,10 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -49,14 +53,17 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            withTheme()
+//            Leveraging data from "kannadaKings.kt" to avoid repetition of code
+            val kings: MutableList<King> = mutableListOf()
+            updateKingsList(kings = kings)
+            withTheme(kings = kings)
         }
     }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun withTheme() {
+fun withTheme(kings: MutableList<King>) {
     ArtSpaceTheme {
         Scaffold(
             topBar = {
@@ -94,6 +101,7 @@ fun withTheme() {
             modifier = Modifier.fillMaxSize(),
         ) { innerPadding ->
             ArtSpaceApp(
+                kings = kings,
                 modifier = Modifier.padding(innerPadding)
             )
         }
@@ -101,7 +109,15 @@ fun withTheme() {
 }
 
 @Composable
-fun ArtSpaceApp(modifier: Modifier = Modifier) {
+fun ArtSpaceApp(
+    kings: MutableList<King>,
+    modifier: Modifier = Modifier
+) {
+    var currentKing by remember { mutableStateOf(0) }
+    val king = kings[currentKing]
+//    val kingsCount by remember { mutableStateOf(kings.size) }
+    val kingsCount by remember { mutableStateOf(3) }  // Hardcoded for now
+
     Surface(
         modifier = modifier
             .fillMaxSize()
@@ -145,7 +161,7 @@ fun ArtSpaceApp(modifier: Modifier = Modifier) {
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = stringResource(R.string.Skandhastambhi),
+                    text = king.getName(),
                     style = TextStyle(
                         color = Color.Black,
                         fontSize = 32.sp,
@@ -175,7 +191,7 @@ fun ArtSpaceApp(modifier: Modifier = Modifier) {
                     )
                 }
                 Text(
-                    text = stringResource(R.string.Skandhastambhi_OtherNames),
+                    text = king.getOtherNames(),
                     style = TextStyle(
                         color = Color.Black,
                         fontSize = 16.sp
@@ -185,7 +201,7 @@ fun ArtSpaceApp(modifier: Modifier = Modifier) {
                     textAlign = TextAlign.Center
                 )
                 Text(
-                    text = stringResource(R.string.Skandhastambhi_Empire),
+                    text = "ಸಾಮ್ರಾಜ್ಯ: " + king.getEmpire(),
                     style = TextStyle(
                         color = Color.Black,
                         fontSize = 24.sp
@@ -195,7 +211,7 @@ fun ArtSpaceApp(modifier: Modifier = Modifier) {
                     textAlign = TextAlign.Center
                 )
                 Text(
-                    text = stringResource(R.string.Skandhastambhi_Kaala),
+                    text = "ಕಾಲ: " + king.getKaala(),
                     style = TextStyle(
                         color = Color.Black,
                         fontSize = 16.sp
@@ -205,7 +221,7 @@ fun ArtSpaceApp(modifier: Modifier = Modifier) {
                     textAlign = TextAlign.Center
                 )
                 Text(
-                    text = stringResource(R.string.Skandhastambhi_Avadhi),
+                    text = "ಆಳ್ವಿಕೆ ಅವಧಿ (ವರ್ಷ): " + king.getAvadhi(),
                     style = TextStyle(
                         color = Color.Black,
                         fontSize = 16.sp
@@ -222,7 +238,10 @@ fun ArtSpaceApp(modifier: Modifier = Modifier) {
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Button(
-                    onClick = { /*TODO*/ },
+                    onClick = {
+                        if (currentKing == 0) { currentKing = kingsCount - 1 }
+                        else { --currentKing }
+                    },
                     modifier = Modifier
                         .weight(1f)
                         .padding(horizontal = 16.dp, vertical = 8.dp)
@@ -236,7 +255,9 @@ fun ArtSpaceApp(modifier: Modifier = Modifier) {
                     )
                 }
                 Button(
-                    onClick = { /*TODO*/ },
+                    onClick = {
+                        currentKing = (++currentKing) % kingsCount
+                    },
                     modifier = Modifier
                         .weight(1f)
                         .padding(horizontal = 16.dp, vertical = 8.dp)
@@ -257,5 +278,5 @@ fun ArtSpaceApp(modifier: Modifier = Modifier) {
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
-    withTheme()
+    withTheme(kings = mutableListOf())
 }
