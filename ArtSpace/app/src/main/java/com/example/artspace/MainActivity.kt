@@ -160,6 +160,7 @@ fun ArtSpaceApp(
                 verticalArrangement = Arrangement.spacedBy(8.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
+                /* king name */
                 Text(
                     text = king.getName(),
                     style = TextStyle(
@@ -171,7 +172,9 @@ fun ArtSpaceApp(
                         .fillMaxWidth(),
                     textAlign = TextAlign.Center
                 )
+                /* Special underline */
                 speacialUnderline(modifier = Modifier.align(Alignment.CenterHorizontally))
+                /* king's other names */
                 Text(
                     text = king.getOtherNames(),
                     style = TextStyle(
@@ -182,6 +185,7 @@ fun ArtSpaceApp(
                         .fillMaxWidth(),
                     textAlign = TextAlign.Center
                 )
+                /* king's empire */
                 Text(
                     text = "ಸಾಮ್ರಾಜ್ಯ: " + king.getEmpire(),
                     style = TextStyle(
@@ -192,6 +196,7 @@ fun ArtSpaceApp(
                         .fillMaxWidth(),
                     textAlign = TextAlign.Center
                 )
+                /* king's kaala */
                 Text(
                     text = "ಕಾಲ: " + king.getKaala(),
                     style = TextStyle(
@@ -202,6 +207,7 @@ fun ArtSpaceApp(
                         .fillMaxWidth(),
                     textAlign = TextAlign.Center
                 )
+                /* king's avadhi */
                 Text(
                     text = "ಆಳ್ವಿಕೆ ಅವಧಿ (ವರ್ಷ): " + king.getAvadhi(),
                     style = TextStyle(
