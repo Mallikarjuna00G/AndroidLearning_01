@@ -115,8 +115,8 @@ fun ArtSpaceApp(
 ) {
     var currentKing by remember { mutableStateOf(0) }
     val king = kings[currentKing]
-//    val kingsCount by remember { mutableStateOf(kings.size) }
-    val kingsCount by remember { mutableStateOf(3) }  // Hardcoded for now
+    val kingsCount by remember { mutableStateOf(kings.size) }
+//    val kingsCount by remember { mutableStateOf(3) }  // Hardcoded for now
 
     Surface(
         modifier = modifier
@@ -171,25 +171,7 @@ fun ArtSpaceApp(
                         .fillMaxWidth(),
                     textAlign = TextAlign.Center
                 )
-                Canvas(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(4.dp)
-                        .align(Alignment.CenterHorizontally)
-                ) {
-                    drawLine(
-                        color = Color.Yellow,
-                        start = Offset(12f, 0f),
-                        end = Offset(size.width - 12f, 0f),
-                        strokeWidth = 2.dp.toPx()
-                    )
-                    drawLine(
-                        color = Color.Red,
-                        start = Offset(12f, size.height - 3f),
-                        end = Offset(size.width - 12f, size.height - 3f),
-                        strokeWidth = 2.dp.toPx()
-                    )
-                }
+                speacialUnderline(modifier = Modifier.align(Alignment.CenterHorizontally))
                 Text(
                     text = king.getOtherNames(),
                     style = TextStyle(
@@ -237,41 +219,67 @@ fun ArtSpaceApp(
                 horizontalArrangement = Arrangement.End,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Button(
-                    onClick = {
-                        if (currentKing == 0) { currentKing = kingsCount - 1 }
-                        else { --currentKing }
-                    },
+                btnsNextPrevious(
+                    isNext = false,
+                    onClickOp = {currentKing = if (currentKing == 0) kingsCount - 1 else --currentKing},
+                    text = stringResource(R.string.btnPreviousText),
                     modifier = Modifier
                         .weight(1f)
                         .padding(horizontal = 16.dp, vertical = 8.dp)
-                ) {
-                    Text(
-                        text = stringResource(R.string.btnPreviousText),
-                        style = MaterialTheme.typography.titleLarge,
-                        modifier = Modifier
-                            .fillMaxWidth(),
-                        textAlign = TextAlign.Center
-                    )
-                }
-                Button(
-                    onClick = {
-                        currentKing = (++currentKing) % kingsCount
-                    },
+                )
+                btnsNextPrevious(
+                    isNext = true,
+                    onClickOp = {currentKing = if (currentKing == kingsCount - 1) 0 else ++currentKing},
+                    text = stringResource(R.string.btnNextText),
                     modifier = Modifier
                         .weight(1f)
                         .padding(horizontal = 16.dp, vertical = 8.dp)
-                ) {
-                    Text(
-                        text = stringResource(R.string.btnNextText),
-                        style = MaterialTheme.typography.titleLarge,
-                        modifier = Modifier
-                            .fillMaxWidth(),
-                        textAlign = TextAlign.Center
-                    )
-                }
+                )
             }
         }
+    }
+}
+
+@Composable
+fun btnsNextPrevious(
+    isNext: Boolean = true,
+    onClickOp: () -> Unit,
+    text: String = "",
+    modifier: Modifier = Modifier
+) {
+    Button(
+        onClick = onClickOp,
+        modifier = modifier
+    ) {
+        Text(
+            text = text,
+            style = MaterialTheme.typography.titleLarge,
+            modifier = Modifier
+                .fillMaxWidth(),
+            textAlign = TextAlign.Center
+        )
+    }
+}
+
+@Composable
+fun speacialUnderline(modifier: Modifier = Modifier) {
+    Canvas(
+        modifier = modifier
+            .fillMaxWidth()
+            .height(4.dp)
+    ) {
+        drawLine(
+            color = Color.Yellow,
+            start = Offset(12f, 0f),
+            end = Offset(size.width - 12f, 0f),
+            strokeWidth = 2.dp.toPx()
+        )
+        drawLine(
+            color = Color.Red,
+            start = Offset(12f, size.height - 3f),
+            end = Offset(size.width - 12f, size.height - 3f),
+            strokeWidth = 2.dp.toPx()
+        )
     }
 }
 

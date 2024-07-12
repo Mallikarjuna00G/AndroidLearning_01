@@ -12,7 +12,7 @@
     <string name="Krishna_Kaala">ಕಾಲ: ಕ್ರಿ.ಪೂ. ೨೦೭-೧೮೯</string>
     <string name="Krishna_Avadhi">ಆಳ್ವಿಕೆ ಅವಧಿ (ವರ್ಷ): ೧೮</string>
     <string name="SriMallakarni">ಶ್ರೀ ಮಲ್ಲಕರ್ಣಿ</string>
-    <string name="SriMallakarni_OtherNames">(ಶ್ರೀ ಸಾತಕರ್ಣಿ)</string>
+    <string name="SriMallakarni_OtherNames">(ಶ್ರೀ ಶಾತಕರ್ಣಿ)</string>
     <string name="SriMallakarni_Empire">ಸಾಮ್ರಾಜ್ಯ: ಶಾತವಾಹನ</string>
     <string name="SriMallakarni_Kaala">ಕಾಲ: ---</string>
     <string name="SriMallakarni_Avadhi">ಆಳ್ವಿಕೆ ಅವಧಿ (ವರ್ಷ): ೧೦</string>
@@ -26,7 +26,7 @@
     <string name="Skandhastambhi_Empire">ಸಾಮ್ರಾಜ್ಯ: ಶಾತವಾಹನ</string>
     <string name="Skandhastambhi_Kaala">ಕಾಲ: ---</string>
     <string name="Skandhastambhi_Avadhi">ಆಳ್ವಿಕೆ ಅವಧಿ (ವರ್ಷ): ೧೮</string>
-    <string name="Saatakarni1">ಸಾತಕರ್ಣಿ</string>
+    <string name="Saatakarni1">ಶಾತಕರ್ಣಿ</string>
     <string name="Saatakarni1_OtherNames">(---)</string>
     <string name="Saatakarni1_Empire">ಸಾಮ್ರಾಜ್ಯ: ಶಾತವಾಹನ</string>
     <string name="Saatakarni1_Kaala">ಕಾಲ: ಕ್ರಿ.ಪೂ. ೧೯೫</string>
@@ -56,12 +56,12 @@
     <string name="Skandasvati_Empire">ಸಾಮ್ರಾಜ್ಯ: ಶಾತವಾಹನ</string>
     <string name="Skandasvati_Kaala">ಕಾಲ: ---</string>
     <string name="Skandasvati_Avadhi">ಆಳ್ವಿಕೆ ಅವಧಿ (ವರ್ಷ): ೭</string>
-    <string name="MahendraShaatakarni">ಮಹೇಂದ್ರ ಸಾತಕರ್ಣಿ</string>
-    <string name="MahendraShaatakarni_OtherNames">(ಮೃಗೇಂದ್ರ ಸ್ವಾತಿಕರ್ಣ, ಸಾತಕರ್ಣಿ ೨)</string>
+    <string name="MahendraShaatakarni">ಮಹೇಂದ್ರ ಶಾತಕರ್ಣಿ</string>
+    <string name="MahendraShaatakarni_OtherNames">(ಮೃಗೇಂದ್ರ ಸ್ವಾತಿಕರ್ಣ, ಶಾತಕರ್ಣಿ ೨)</string>
     <string name="MahendraShaatakarni_Empire">ಸಾಮ್ರಾಜ್ಯ: ಶಾತವಾಹನ</string>
     <string name="MahendraShaatakarni_Kaala">ಕಾಲ: ---</string>
     <string name="MahendraShaatakarni_Avadhi">ಆಳ್ವಿಕೆ ಅವಧಿ (ವರ್ಷ): ೮</string>
-    <string name="KuntalaShaatakarni">ಕುಂತಲ ಸಾತಕರ್ಣಿ</string>
+    <string name="KuntalaShaatakarni">ಕುಂತಲ ಶಾತಕರ್ಣಿ</string>
     <string name="KuntalaShaatakarni_OtherNames">(ಕುಂತಲ ಸ್ವಾತಿಕರ್ಣ)</string>
     <string name="KuntalaShaatakarni_Empire">ಸಾಮ್ರಾಜ್ಯ: ಶಾತವಾಹನ</string>
     <string name="KuntalaShaatakarni_Kaala">ಕಾಲ: ---</string>
@@ -96,12 +96,12 @@
     <string name="Purindrasena_Empire">ಸಾಮ್ರಾಜ್ಯ: ಶಾತವಾಹನ</string>
     <string name="Purindrasena_Kaala">ಕಾಲ: ---</string>
     <string name="Purindrasena_Avadhi">ಆಳ್ವಿಕೆ ಅವಧಿ (ವರ್ಷ): ೫</string>
-    <string name="SundaraShaatakarni">ಸುಂದರ ಸಾತಕರ್ಣಿ</string>
+    <string name="SundaraShaatakarni">ಸುಂದರ ಶಾತಕರ್ಣಿ</string>
     <string name="SundaraShaatakarni_OtherNames">(---)</string>
     <string name="SundaraShaatakarni_Empire">ಸಾಮ್ರಾಜ್ಯ: ಶಾತವಾಹನ</string>
     <string name="SundaraShaatakarni_Kaala">ಕಾಲ: ---</string>
     <string name="SundaraShaatakarni_Avadhi">ಆಳ್ವಿಕೆ ಅವಧಿ (ವರ್ಷ): ೧</string>
-    <string name="CakoraShaatakarni">ಚಕೋರ ಸಾತಕರ್ಣಿ</string>
+    <string name="CakoraShaatakarni">ಚಕೋರ ಶಾತಕರ್ಣಿ</string>
     <string name="CakoraShaatakarni_OtherNames">(ಚಕೋರ ಸ್ವಾತಿಕರ್ಣ)</string>
     <string name="CakoraShaatakarni_Empire">ಸಾಮ್ರಾಜ್ಯ: ಶಾತವಾಹನ</string>
     <string name="CakoraShaatakarni_Kaala">ಕಾಲ: ---</string>
@@ -111,7 +111,7 @@
     <string name="Shivasvati_Empire">ಸಾಮ್ರಾಜ್ಯ: ಶಾತವಾಹನ</string>
     <string name="Shivasvati_Kaala">ಕಾಲ: ---</string>
     <string name="Shivasvati_Avadhi">ಆಳ್ವಿಕೆ ಅವಧಿ (ವರ್ಷ): ೨೮</string>
-    <string name="GautamiputraSaatakarni">ಗೌತಮೀಪುತ್ರ ಸಾತಕರ್ಣಿ</string>
+    <string name="GautamiputraSaatakarni">ಗೌತಮೀಪುತ್ರ ಶಾತಕರ್ಣಿ</string>
     <string name="GautamiputraSaatakarni_OtherNames">(ಗೌತಮೀಪುತ್ರ ಶಾಲಿವಾಹನ)</string>
     <string name="GautamiputraSaatakarni_Empire">ಸಾಮ್ರಾಜ್ಯ: ಶಾತವಾಹನ</string>
     <string name="GautamiputraSaatakarni_Kaala">ಕಾಲ: ಕ್ರಿ.ಶ. ೨೫-೭೮</string>
@@ -121,7 +121,7 @@
     <string name="VasisthiputraSriPulamavi_Empire">ಸಾಮ್ರಾಜ್ಯ: ಶಾತವಾಹನ</string>
     <string name="VasisthiputraSriPulamavi_Kaala">ಕಾಲ: ಕ್ರಿ.ಶ. ೭೮-೧೧೪</string>
     <string name="VasisthiputraSriPulamavi_Avadhi">ಆಳ್ವಿಕೆ ಅವಧಿ (ವರ್ಷ): ೨೮</string>
-    <string name="VashishtiputraSaatakarni">ವಾಸಿಷ್ಠಿಪುತ್ರ ಸಾತಕರ್ಣಿ</string>
+    <string name="VashishtiputraSaatakarni">ವಾಸಿಷ್ಠಿಪುತ್ರ ಶಾತಕರ್ಣಿ</string>
     <string name="VashishtiputraSaatakarni_OtherNames">(ಶಿವ ಶ್ರೀ, ಶಿವಸ್ರಿ)</string>
     <string name="VashishtiputraSaatakarni_Empire">ಸಾಮ್ರಾಜ್ಯ: ಶಾತವಾಹನ</string>
     <string name="VashishtiputraSaatakarni_Kaala">ಕಾಲ: ಕ್ರಿ.ಶ. ೧೩೦-೧೬೦</string>
