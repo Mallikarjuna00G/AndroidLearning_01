@@ -2,6 +2,9 @@
 
 Learning android development from [Android Basics with Compose](https://developer.android.com/courses/android-basics-compose/course)
 
+Project: [clearDoubts](./clearDoubts)
+- Learning custom theming: Dark theme. `MaterialTheme` shall be inside the `ClearDoubtsTheme`.
+
 ## Unit 1: Your first Android app
 
 Link: [Unit 1](https://developer.android.com/courses/android-basics-compose/unit-1)
