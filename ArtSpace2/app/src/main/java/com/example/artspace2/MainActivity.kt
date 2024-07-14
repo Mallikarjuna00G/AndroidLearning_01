@@ -3,7 +3,6 @@ package com.example.artspace2
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -18,6 +17,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -34,7 +34,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.LinearGradientShader
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -49,20 +48,9 @@ class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+//        enableEdgeToEdge()
         setContent {
-            MaterialTheme (
-                colorScheme = darkColorScheme(
-                    primary = Color.Black,
-                    onPrimary = Color.White,
-                    secondary = Color.Yellow,
-                    onSecondary = Color.Red,
-                    background = Color.Black,
-                    onBackground = Color.White,
-                    surface = Color.Black,
-                    onSurface = Color.White
-                )
-            ) {
+            ArtSpace2Theme {
                 WithTheme()
             }
         }
@@ -71,7 +59,18 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun WithTheme() {
-    ArtSpace2Theme {
+    MaterialTheme (
+        colorScheme = darkColorScheme(
+            primary = Color.Black,
+            onPrimary = Color.White,
+            secondary = Color.Yellow,
+            onSecondary = Color.Red,
+            background = Color.Black,
+            onBackground = Color.White,
+            surface = Color.Black,
+            onSurface = Color.White
+        )
+    ) {
         Scaffold(
             topBar = {TopAppBarDecoration(modifier = Modifier)},
             modifier = Modifier
@@ -156,7 +155,7 @@ fun ArtSpace2App(
             Section2(
                 modifier = Modifier
 //                    .border(width = 2.dp, color = Color.Green)
-                    .weight(33f)
+                    .weight(35f)
                     .fillMaxWidth()
                     .wrapContentSize()
                     .background(Color.Black)
@@ -164,7 +163,7 @@ fun ArtSpace2App(
             Section3(
                 modifier = Modifier
 //                    .border(width = 2.dp, color = Color.Blue)
-                    .weight(7f)
+                    .weight(5f)
                     .fillMaxWidth()
                     .wrapContentSize()
                     .background(Color.Black)
@@ -228,55 +227,49 @@ fun Section2(
             Text(
                 text = "ರಾಜ್ ಕುಮಾರ್"
             )
-            SpecialLine(modifier = Modifier)
             Column(
                 modifier = Modifier
-                    .padding(8.dp)
+                    .fillMaxHeight()
             ) {
-                Row(
+                SpecialLine(
                     modifier = Modifier
-                ) {
-                    Text(text = "ಇತರೆ ಹೆಸರು: ", modifier = Modifier.weight(3f))
-                    Text(text = "ಸಿಂಗಾನಲ್ಲೂರು ಪುಟ್ಟಸ್ವಾಮಯ್ಯ ಮುತ್ತುರಾಜು, ಅಣ್ಣಾವ್ರು", modifier = Modifier.weight(7f))
-                }
-                SimpleLine(modifier = Modifier)
-                Row(
+                        .weight(1f))
+                Column(
                     modifier = Modifier
+                        .padding(8.dp)
+                        .weight(8f)
                 ) {
-                    Text(text = "ಜನನ: ", modifier = Modifier.weight(3f))
-                    Text(text = "ಸ೨೪ ಏಪ್ರಿಲ್, ೧೯೨೯\nಗಾಜನೂರು, ಮೈಸೂರು ಸಂಸ್ಥಾನ, ಬ್ರಿಟಿಷ್ ಭಾರತ", modifier = Modifier.weight(7f))
-                }
-                SimpleLine(modifier = Modifier)
-                Row(
+                    val about = listOf(
+                        listOf("ಇತರೆ ಹೆಸರು: ", "ಸಿಂಗಾನಲ್ಲೂರು ಪುಟ್ಟಸ್ವಾಮಯ್ಯ ಮುತ್ತುರಾಜು, ಅಣ್ಣಾವ್ರು"),
+                        listOf("ಜನನ: ", "೨೪ ಏಪ್ರಿಲ್, ೧೯೨೯\nಗಾಜನೂರು, ಮೈಸೂರು ಸಂಸ್ಥಾನ, ಬ್ರಿಟಿಷ್ ಭಾರತ"),
+                        listOf("ಮರಣ: ", "12 ಏಪ್ರಿಲ್ 2006 (ವಯಸ್ಸು - 76)\nಬೆಂಗಳೂರು, ಕರ್ನಾಟಕ, ಭಾರತ"),
+                        listOf("ಕೊಡುಗೆ ರೂಪಗಳು: ", "ನಾಯಕ ನಟ, ಗಾಯಕ, ನಿರ್ಮಾಪಕ, ಸಹ ನಟ"),
+                        listOf("ಮೊದಲ ಚಿತ್ರ: ", "ಬೇಡರ ಕಣ್ಣಪ್ಪ"),
+                        listOf("ಬಿರುದುಗಳು: ", "ನಟಸಾರ್ವಭೌಮ, ಕರ್ನಾಟಕ ರತ್ನ, ವರನಟ,ಅಣ್ಣಾವ್ರು"),
+                    )
+                    LazyColumn() {
+                        items(about.size) { index ->
+                            Row(
+                                modifier = Modifier
+                            ) {
+                                Text(text = about[index][0], modifier = Modifier.weight(3f))
+                                Text(
+                                    text = about[index][1],
+                                    modifier = Modifier.weight(7f)
+                                )
+                            }
+                            if (index != about.size - 1) {
+                                SimpleLine(modifier = Modifier)
+                            }
+                        }
+                    }  // LazyColumn
+                }  // Column
+                SpecialLine(
                     modifier = Modifier
-                ) {
-                    Text(text = "ಮರಣ: ", modifier = Modifier.weight(3f))
-                    Text(text = "12 ಏಪ್ರಿಲ್ 2006 (ವಯಸ್ಸು - 76)\nಬೆಂಗಳೂರು, ಕರ್ನಾಟಕ, ಭಾರತ", modifier = Modifier.weight(7f))
-                }
-                SimpleLine(modifier = Modifier)
-                Row(
-                    modifier = Modifier
-                ) {
-                    Text(text = "ಕೊಡುಗೆ ರೂಪಗಳು: ", modifier = Modifier.weight(3f))
-                    Text(text = "ನಾಯಕ ನಟ, ಗಾಯಕ, ನಿರ್ಮಾಪಕ, ಸಹ ನಟ", modifier = Modifier.weight(7f))
-                }
-                SimpleLine(modifier = Modifier)
-                Row(
-                    modifier = Modifier
-                ) {
-                    Text(text = "ಮೊದಲ ಚಿತ್ರ: ", modifier = Modifier.weight(3f))
-                    Text(text = "ಬೇಡರ ಕಣ್ಣಪ್ಪ", modifier = Modifier.weight(7f))
-                }
-                SimpleLine(modifier = Modifier)
-                Row(
-                    modifier = Modifier
-                ) {
-                    Text(text = "ಬಿರುದುಗಳು: ", modifier = Modifier.weight(3f))
-                    Text(text = "ನಟಸಾರ್ವಭೌಮ, ಕರ್ನಾಟಕ ರತ್ನ, ವರನಟ,ಅಣ್ಣಾವ್ರು", modifier = Modifier.weight(7f))
-                }
+                        .weight(1f)
+                )
             }  // Column
-            SpecialLine(modifier = Modifier)
-        }
+        }  // Column
     }
 }
 
@@ -304,20 +297,26 @@ fun SpecialLine(
     Canvas(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 2.dp),
+            .padding(horizontal = 2.dp)
+//            .border(width = 1.dp, color = Color.White)
+            .height(8.dp),
         contentDescription = null.toString(),
     ) {
+        val strokeWidth = 8f
+        val halfOfStrokeWidth = strokeWidth / 2
+        var nextY = 0f
         drawLine(
             color = Color.Yellow,
-            start = Offset(0f, 0f),
-            end = Offset(size.width, 0f),
-            strokeWidth = 8f
+            start = Offset(0f, halfOfStrokeWidth),
+            end = Offset(size.width, halfOfStrokeWidth),
+            strokeWidth = strokeWidth
         )
+        nextY += strokeWidth
         drawLine(
             color = Color.Red,
-            start = Offset(0f, 8f),
-            end = Offset(size.width, 8f),
-            strokeWidth = 8f
+            start = Offset(0f, nextY + halfOfStrokeWidth),
+            end = Offset(size.width, nextY + halfOfStrokeWidth),
+            strokeWidth = strokeWidth
         )
     }
 }
