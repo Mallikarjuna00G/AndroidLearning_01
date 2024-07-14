@@ -43,6 +43,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.artspace2.ui.theme.ArtSpace2Theme
+import com.example.artspace2.ui.theme.Typography
 
 class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
@@ -69,7 +70,7 @@ fun WithTheme() {
             onBackground = Color.White,
             surface = Color.Black,
             onSurface = Color.White
-        )
+        ),
     ) {
         Scaffold(
             topBar = {TopAppBarDecoration(modifier = Modifier)},
@@ -225,7 +226,8 @@ fun Section2(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = "ರಾಜ್ ಕುಮಾರ್"
+                text = "ರಾಜ್ ಕುಮಾರ್",
+                style = Typography.headlineMedium,
             )
             Column(
                 modifier = Modifier
@@ -336,8 +338,8 @@ fun Section3(
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Text(text = "ಸಂಗ್ರಹ: ")
-            Text(text = "ನಾಯಕ ನಟ")
+            Text(text = "ಸಂಗ್ರಹ: ", style = Typography.headlineSmall)
+            Text(text = "ನಾಯಕ ನಟ", style = Typography.headlineSmall)
         }
     }
 }
@@ -354,34 +356,37 @@ fun Section4(
             horizontalArrangement = Arrangement.SpaceEvenly,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Button(
-                onClick = {},
+            btnsNextOrPrevious(
+                isNext = false,
                 modifier = Modifier
-                    .padding(2.dp)
                     .weight(3f)
-                    .background(brush = Brush.verticalGradient(listOf(Color.Yellow, Color.Red))),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = Color.Yellow,
-                    contentColor = Color.Red
-                )
-            ) {
-                Text(text = "ಹಿಂದಿನ")
-            }
+            )
             Spacer(modifier = Modifier.weight(4f))
-            Button(
-                onClick = {},
+            btnsNextOrPrevious(
+                isNext = true,
                 modifier = Modifier
-                    .padding(2.dp)
                     .weight(3f)
-                    .background(brush = Brush.verticalGradient(listOf(Color.Yellow, Color.Red))),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = Color.Yellow,
-                    contentColor = Color.Red
-                )
-            ) {
-                Text(text = "ಮುಂದಿನ")
-            }
+            )
         }
     }
 }
 
+@Composable
+fun btnsNextOrPrevious(
+    isNext: Boolean,
+    modifier: Modifier = Modifier
+) {
+    val text = if(isNext) "ಮುಂದಿನ" else "ಹಿಂದಿನ"
+    Button(
+        onClick = {},
+        modifier = Modifier
+            .padding(2.dp)
+            .background(brush = Brush.verticalGradient(listOf(Color.Yellow, Color.Red))),
+        colors = ButtonDefaults.buttonColors(
+            containerColor = Color.Yellow,
+            contentColor = Color.Red
+        )
+    ) {
+        Text(text = text)
+    }
+}
