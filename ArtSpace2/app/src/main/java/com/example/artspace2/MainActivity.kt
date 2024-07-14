@@ -76,7 +76,6 @@ fun WithTheme() {
             topBar = {TopAppBarDecoration(modifier = Modifier)},
             modifier = Modifier
                 .fillMaxSize()
-                .background(Color.Black)
         ) { innerPadding ->
             ArtSpace2App(
                 modifier = Modifier.padding(innerPadding)
@@ -135,56 +134,35 @@ fun ArtSpace2App(
     Surface(
         modifier = modifier
             .fillMaxSize()
-            .background(Color.Black)
     ) {
         Column(
             modifier = Modifier
                 .padding(2.dp)
-                .fillMaxWidth()
-                .background(Color.Black),
+                .fillMaxWidth(),
             verticalArrangement = Arrangement.spacedBy(2.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Section1(
-                modifier = Modifier
-//                    .border(width = 2.dp, color = Color.Red)
-                    .weight(40f)
-                    .fillMaxWidth()
-                    .wrapContentSize()
-                    .background(Color.Black)
+            val sectionWeights = listOf(40f, 35f, 5f, 7f)
+            val sections = listOf(
+                Section1,
+                Section2,
+                Section3,
+                Section4
             )
-            Section2(
-                modifier = Modifier
-//                    .border(width = 2.dp, color = Color.Green)
-                    .weight(35f)
-                    .fillMaxWidth()
-                    .wrapContentSize()
-                    .background(Color.Black)
-            )
-            Section3(
-                modifier = Modifier
-//                    .border(width = 2.dp, color = Color.Blue)
-                    .weight(5f)
-                    .fillMaxWidth()
-                    .wrapContentSize()
-                    .background(Color.Black)
-            )
-            Section4(
-                modifier = Modifier
-//                    .border(width = 2.dp, color = Color.Blue)
-                    .weight(7f)
-                    .fillMaxWidth()
-                    .wrapContentSize()
-                    .background(Color.Black)
-            )
+            var i = 0
+            for(theSection in sections) {
+                theSection(
+                    Modifier
+                        .weight(sectionWeights[i++])
+                        .fillMaxWidth()
+                        .wrapContentSize()
+                )
+            }
         }
     }  // Surface
 }  // ArtSpace2App
 
-@Composable
-fun Section1(
-    modifier: Modifier = Modifier
-) {
+val Section1: @Composable (Modifier) -> Unit =  { modifier ->
     Surface(
         modifier = modifier
             .padding(28.dp)
@@ -194,7 +172,6 @@ fun Section1(
             contentDescription = null.toString(),
             modifier = modifier
                 .fillMaxHeight()
-                .background(Color.Black)
                 .border(
                     width = 8.dp,
                     shape = RectangleShape,
@@ -210,18 +187,14 @@ fun Section1(
     }
 }
 
-@Composable
-fun Section2(
-    modifier: Modifier = Modifier
-) {
+val Section2: @Composable (modifier: Modifier) -> Unit = { modifier ->
     Surface(
         modifier = modifier,
     ) {
         Column(
             modifier = Modifier
                 .padding(2.dp)
-                .fillMaxWidth()
-                .background(color = Color.Black),
+                .fillMaxWidth(),
             verticalArrangement = Arrangement.spacedBy(2.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -323,10 +296,7 @@ fun SpecialLine(
     }
 }
 
-@Composable
-fun Section3(
-    modifier: Modifier
-) {
+val Section3: @Composable (modifier: Modifier) -> Unit = { modifier ->
     Surface(
         modifier = modifier
             .border(width = 2.dp, color = Color.Red)
@@ -344,10 +314,7 @@ fun Section3(
     }
 }
 
-@Composable
-fun Section4(
-    modifier: Modifier = Modifier
-) {
+val Section4: @Composable (modifier: Modifier) -> Unit = { modifier ->
     Surface(
         modifier = modifier
     ) {
