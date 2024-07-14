@@ -29,6 +29,11 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
@@ -51,15 +56,20 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 //        enableEdgeToEdge()
         setContent {
+            val sangrahaList = mutableListOf<ContributionForm>()
+            val actorsList = mutableListOf<Actor>()
+            val actorCategoryID = ActorCategoryID()
+
+            updateKannadaActorsData(sangrahaList = sangrahaList, actorsList = actorsList, actorCategoryID = actorCategoryID)
             ArtSpace2Theme {
-                WithTheme()
+                WithTheme(sangrahaList = sangrahaList, actorsList = actorsList, actorCategoryID = actorCategoryID)
             }
         }
     }
 }
 
 @Composable
-fun WithTheme() {
+fun WithTheme(sangrahaList: MutableList<ContributionForm>, actorsList: MutableList<Actor>, actorCategoryID: ActorCategoryID) {
     MaterialTheme (
         colorScheme = darkColorScheme(
             primary = Color.Black,
@@ -78,6 +88,9 @@ fun WithTheme() {
                 .fillMaxSize()
         ) { innerPadding ->
             ArtSpace2App(
+                sangrahaList = sangrahaList,
+                actorsList = actorsList,
+                actorCategoryID = actorCategoryID,
                 modifier = Modifier.padding(innerPadding)
             )
         }
@@ -124,13 +137,41 @@ fun TopAppBarDecoration(
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
-    WithTheme()
+    val sangrahaList = mutableListOf<ContributionForm>()
+    val actorsList = mutableListOf<Actor>()
+    val actorCategoryID = ActorCategoryID()
+
+    updateKannadaActorsData(sangrahaList = sangrahaList, actorsList = actorsList, actorCategoryID = actorCategoryID)
+    WithTheme(sangrahaList = sangrahaList, actorsList = actorsList, actorCategoryID = actorCategoryID)
+}
+
+class MyStateVariables(
+    private var maxAlbums: Int = 0,
+    private var currentAlbum: Int = 0,
+    private var maxActorsInCurrentAlbum: Int = 0,
+    private var currentActorInCurrentAlbum: Int = 0
+) {
+    fun setMaxAlbums(value: Int) { maxAlbums = value }
+    fun setCurrentAlbum(value: Int) { currentAlbum = value }
+    fun setMaxActorsInCurrentAlbum(value: Int) { maxActorsInCurrentAlbum = value }
+    fun setCurrentActorInCurrentAlbum(value: Int) { currentActorInCurrentAlbum = value }
+
+    fun getMaxAlbums(): Int { return maxAlbums }
+    fun getCurrentAlbum(): Int { return currentAlbum }
+    fun getMaxActorsInCurrentAlbum(): Int { return maxActorsInCurrentAlbum }
+    fun getCurrentActorInCurrentAlbum(): Int { return currentActorInCurrentAlbum }
 }
 
 @Composable
 fun ArtSpace2App(
+    sangrahaList: MutableList<ContributionForm>,
+    actorsList: MutableList<Actor>,
+    actorCategoryID: ActorCategoryID,
     modifier: Modifier = Modifier
 ) {
+    val myStateVariables by remember { mutableStateOf(MyStateVariables(0,0, 0, 0)) }
+    myStateVariables.setMaxAlbums(sangrahaList.size)
+
     Surface(
         modifier = modifier
             .fillMaxSize()
@@ -152,6 +193,9 @@ fun ArtSpace2App(
             var i = 0
             for(theSection in sections) {
                 theSection(
+                    sangrahaList = sangrahaList,
+                    actorsList = actorsList,
+                    actorCategoryID = actorCategoryID,
                     Modifier
                         .weight(sectionWeights[i++])
                         .fillMaxWidth()
@@ -162,7 +206,11 @@ fun ArtSpace2App(
     }  // Surface
 }  // ArtSpace2App
 
-val Section1: @Composable (Modifier) -> Unit =  { modifier ->
+val Section1: @Composable (
+    sangrahaList: MutableList<ContributionForm>,
+    actorsList: MutableList<Actor>,
+    actorCategoryID: ActorCategoryID,
+    modifier: Modifier) -> Unit =  { sangrahaList, actorsList, actorCategoryID, modifier ->
     Surface(
         modifier = modifier
             .padding(28.dp)
@@ -187,7 +235,11 @@ val Section1: @Composable (Modifier) -> Unit =  { modifier ->
     }
 }
 
-val Section2: @Composable (modifier: Modifier) -> Unit = { modifier ->
+val Section2: @Composable (
+    sangrahaList: MutableList<ContributionForm>,
+    actorsList: MutableList<Actor>,
+    actorCategoryID: ActorCategoryID,
+    modifier: Modifier) -> Unit =  { sangrahaList, actorsList, actorCategoryID, modifier ->
     Surface(
         modifier = modifier,
     ) {
@@ -296,7 +348,11 @@ fun SpecialLine(
     }
 }
 
-val Section3: @Composable (modifier: Modifier) -> Unit = { modifier ->
+val Section3: @Composable (
+    sangrahaList: MutableList<ContributionForm>,
+    actorsList: MutableList<Actor>,
+    actorCategoryID: ActorCategoryID,
+    modifier: Modifier) -> Unit =  { sangrahaList, actorsList, actorCategoryID, modifier ->
     Surface(
         modifier = modifier
             .border(width = 2.dp, color = Color.Red)
@@ -314,7 +370,11 @@ val Section3: @Composable (modifier: Modifier) -> Unit = { modifier ->
     }
 }
 
-val Section4: @Composable (modifier: Modifier) -> Unit = { modifier ->
+val Section4: @Composable (
+    sangrahaList: MutableList<ContributionForm>,
+    actorsList: MutableList<Actor>,
+    actorCategoryID: ActorCategoryID,
+    modifier: Modifier) -> Unit =  { sangrahaList, actorsList, actorCategoryID, modifier ->
     Surface(
         modifier = modifier
     ) {
