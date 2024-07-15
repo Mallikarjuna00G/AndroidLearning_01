@@ -24,6 +24,16 @@ class Actor(
     fun getReadMore(): String { return readMore }
     fun getContributionForms(): MutableList<ContributionForm> { return contributionForms }
 
+    fun getContributionFormsAsOneString(): String {
+        var contributionFormsAsOneString = ""
+
+        for(contributionForm in contributionForms) {
+            contributionFormsAsOneString += contributionForm.getNameKn() + ", "
+        }
+        contributionFormsAsOneString = contributionFormsAsOneString.dropLast(2)
+        return contributionFormsAsOneString
+    }
+
     fun contributionFormsUpdater(
         sangrahaList: MutableList<ContributionForm>,
         is_naayakatva: Boolean = false,

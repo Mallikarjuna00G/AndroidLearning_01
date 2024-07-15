@@ -347,8 +347,7 @@ fun Section2(
                         listOf(stringResource(R.string.otherNames), actorsList.get(myStateVariables.getCurrentActorInFullList()).getOtherNames()),
                         listOf(stringResource(R.string.janana), actorsList.get(myStateVariables.getCurrentActorInFullList()).getBirth()),
                         listOf(stringResource(R.string.marana), actorsList.get(myStateVariables.getCurrentActorInFullList()).getDeath()),
-//                        listOf(stringResource(R.string.kodugeRoopagalu), actorsList.get(myStateVariables.getCurrentActorInFullList()).getContributionForms()),
-                        listOf(stringResource(R.string.kodugeRoopagalu), "ಬಾಕಿ ಇದೆ"), //TODO(Actual implementation pending)
+                        listOf(stringResource(R.string.kodugeRoopagalu), actorsList.get(myStateVariables.getCurrentActorInFullList()).getContributionFormsAsOneString()),
                         listOf(stringResource(R.string.firstMovie), actorsList.get(myStateVariables.getCurrentActorInFullList()).getFirstKannadaMovie()),
                         listOf(stringResource(R.string.birudugalu), actorsList.get(myStateVariables.getCurrentActorInFullList()).getTitles()),
                     )
