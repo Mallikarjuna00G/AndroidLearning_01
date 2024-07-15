@@ -77,15 +77,7 @@ class ContributionForm(
 }
 
 class ActorCategoryID() {
-    var idsNaayakatva: MutableList<Int> = mutableListOf()
-    var idsGaayana: MutableList<Int> = mutableListOf()
-    var idsNirmaapane: MutableList<Int> = mutableListOf()
-    var idsSahaNirmaapane: MutableList<Int> = mutableListOf()
-    var idsNirdeshana: MutableList<Int> = mutableListOf()
-    var idsSahaNirdeshana: MutableList<Int> = mutableListOf()
-    var idsSahanatane: MutableList<Int> = mutableListOf()
-    var idsHaasyaNatane: MutableList<Int> = mutableListOf()
-    var idsKhalanaayakatva: MutableList<Int> = mutableListOf()
+    var theIDs: MutableList<MutableList<Int>> = mutableListOf(mutableListOf())
 }
 
 fun main() {
@@ -107,17 +99,16 @@ fun updateActorCategoryID(
     sangrahaList: MutableList<ContributionForm>,
     actorsList: MutableList<Actor>
 ) {
+    for(sangraha in sangrahaList) {
+        actorCategoryID.theIDs.add(mutableListOf())
+    }
     for(actor in actorsList){
         for(category in actor.getContributionForms()) {
-            if(category.getNameEn() == "naayakatva") actorCategoryID.idsNaayakatva.add(actorsList.indexOf(actor))
-            if(category.getNameEn() == "gaayana") actorCategoryID.idsGaayana.add(actorsList.indexOf(actor))
-            if(category.getNameEn() == "nirmaapane") actorCategoryID.idsNirmaapane.add(actorsList.indexOf(actor))
-            if(category.getNameEn() == "sahaNirmaapane") actorCategoryID.idsSahaNirmaapane.add(actorsList.indexOf(actor))
-            if(category.getNameEn() == "nirdeshana") actorCategoryID.idsNirdeshana.add(actorsList.indexOf(actor))
-            if(category.getNameEn() == "sahaNirdeshana") actorCategoryID.idsSahaNirdeshana.add(actorsList.indexOf(actor))
-            if(category.getNameEn() == "sahaNatane") actorCategoryID.idsSahanatane.add(actorsList.indexOf(actor))
-            if(category.getNameEn() == "haasyaNatane") actorCategoryID.idsHaasyaNatane.add(actorsList.indexOf(actor))
-            if(category.getNameEn() == "khalanaayakatva") actorCategoryID.idsKhalanaayakatva.add(actorsList.indexOf(actor))
+            for(sangraha in sangrahaList) {
+                if(category.getNameEn() == sangraha.getNameEn()) {
+                    actorCategoryID.theIDs.get(sangrahaList.indexOf(sangraha)).add(actorsList.indexOf(actor))
+                }
+            }
         }
     }
 }

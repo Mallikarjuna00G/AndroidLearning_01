@@ -3,6 +3,7 @@ package com.example.artspace2
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.annotation.StringRes
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -29,7 +30,6 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -45,7 +45,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.artspace2.ui.theme.ArtSpace2Theme
 import com.example.artspace2.ui.theme.Typography
@@ -134,28 +133,31 @@ fun TopAppBarDecoration(
     }  // Column
 }  // TopBar
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    val sangrahaList = mutableListOf<ContributionForm>()
-    val actorsList = mutableListOf<Actor>()
-    val actorCategoryID = ActorCategoryID()
-
-    updateKannadaActorsData(sangrahaList = sangrahaList, actorsList = actorsList, actorCategoryID = actorCategoryID)
-    WithTheme(sangrahaList = sangrahaList, actorsList = actorsList, actorCategoryID = actorCategoryID)
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun GreetingPreview() {
+//    val sangrahaList = mutableListOf<ContributionForm>()
+//    val actorsList = mutableListOf<Actor>()
+//    val actorCategoryID = ActorCategoryID()
+//
+//    updateKannadaActorsData(sangrahaList = sangrahaList, actorsList = actorsList, actorCategoryID = actorCategoryID)
+//    WithTheme(sangrahaList = sangrahaList, actorsList = actorsList, actorCategoryID = actorCategoryID)
+//}
 
 class MyStateVariables(
+    private var currentActorInFullList: Int = 0,
     private var maxAlbums: Int = 0,
     private var currentAlbum: Int = 0,
     private var maxActorsInCurrentAlbum: Int = 0,
     private var currentActorInCurrentAlbum: Int = 0
 ) {
+    fun setCurrentActorInFullList(value: Int) { currentActorInFullList = value }
     fun setMaxAlbums(value: Int) { maxAlbums = value }
     fun setCurrentAlbum(value: Int) { currentAlbum = value }
     fun setMaxActorsInCurrentAlbum(value: Int) { maxActorsInCurrentAlbum = value }
     fun setCurrentActorInCurrentAlbum(value: Int) { currentActorInCurrentAlbum = value }
 
+    fun getCurrentActorInFullList(): Int { return currentActorInFullList }
     fun getMaxAlbums(): Int { return maxAlbums }
     fun getCurrentAlbum(): Int { return currentAlbum }
     fun getMaxActorsInCurrentAlbum(): Int { return maxActorsInCurrentAlbum }
@@ -169,8 +171,21 @@ fun ArtSpace2App(
     actorCategoryID: ActorCategoryID,
     modifier: Modifier = Modifier
 ) {
-    val myStateVariables by remember { mutableStateOf(MyStateVariables(0,0, 0, 0)) }
-    myStateVariables.setMaxAlbums(sangrahaList.size)
+    var myStateVariables by remember {
+        mutableStateOf(
+            MyStateVariables(
+                currentActorInFullList = 0,
+                maxAlbums = sangrahaList.size,
+                currentAlbum = 0,
+                maxActorsInCurrentAlbum = 0,
+                currentActorInCurrentAlbum = 0)
+        )
+    }
+
+    var albumChange by remember { mutableStateOf(false) }
+    var actorChange by remember { mutableStateOf(false) }
+
+    myStateVariables.setMaxActorsInCurrentAlbum(actorCategoryID.theIDs.get(myStateVariables.getCurrentAlbum()).size)
 
     Surface(
         modifier = modifier
@@ -183,40 +198,100 @@ fun ArtSpace2App(
             verticalArrangement = Arrangement.spacedBy(2.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            val sectionWeights = listOf(40f, 35f, 5f, 7f)
-            val sections = listOf(
-                Section1,
-                Section2,
-                Section3,
-                Section4
+            Section1(
+                actorChange = actorChange,
+                actorsList = actorsList,
+                myStateVariables = myStateVariables,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .wrapContentSize()
+                    .weight(40f)
             )
-            var i = 0
-            for(theSection in sections) {
-                theSection(
-                    sangrahaList = sangrahaList,
-                    actorsList = actorsList,
-                    actorCategoryID = actorCategoryID,
-                    Modifier
-                        .weight(sectionWeights[i++])
-                        .fillMaxWidth()
-                        .wrapContentSize()
-                )
-            }
+            Section2(
+                actorChange = actorChange,
+                actorsList = actorsList,
+                myStateVariables = myStateVariables,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .wrapContentSize()
+                    .weight(35f)
+            )
+            Section3(
+                albumChange = albumChange,
+                sangrahaList = sangrahaList,
+                myStateVariables = myStateVariables,
+                currentAlbumInc = {
+                    albumChange = !albumChange
+                    myStateVariables.setCurrentAlbum(
+                        when(myStateVariables.getCurrentAlbum()) {
+                            myStateVariables.getMaxAlbums() - 1 -> 0
+                            else -> myStateVariables.getCurrentAlbum() + 1
+                        }
+                    )
+                    myStateVariables.setCurrentActorInCurrentAlbum(0)
+                    myStateVariables.setCurrentActorInFullList(actorCategoryID.theIDs.get(myStateVariables.getCurrentAlbum()).get(myStateVariables.getCurrentActorInCurrentAlbum()))
+                },
+                currentAlbumDec = {
+                    albumChange = !albumChange
+                    myStateVariables.setCurrentAlbum(
+                        when(myStateVariables.getCurrentAlbum()) {
+                            0 -> myStateVariables.getMaxAlbums() - 1
+                            else -> myStateVariables.getCurrentAlbum() - 1
+                        }
+                    )
+                    myStateVariables.setCurrentActorInCurrentAlbum(0)
+                    myStateVariables.setCurrentActorInFullList(actorCategoryID.theIDs.get(myStateVariables.getCurrentAlbum()).get(myStateVariables.getCurrentActorInCurrentAlbum()))
+                },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .wrapContentSize()
+                    .weight(5f)
+            )
+            Section4(
+                currentActorInc = {
+                    actorChange = !actorChange
+                    myStateVariables.setCurrentActorInCurrentAlbum(
+                        when(myStateVariables.getCurrentActorInCurrentAlbum()) {
+                            myStateVariables.getMaxActorsInCurrentAlbum() - 1 -> 0
+                            else -> myStateVariables.getCurrentActorInCurrentAlbum() + 1
+                        }
+                    )
+                    myStateVariables.setCurrentActorInFullList(actorCategoryID.theIDs.get(myStateVariables.getCurrentAlbum()).get(myStateVariables.getCurrentActorInCurrentAlbum()))
+                },
+                currentActorDec = {
+                    actorChange = !actorChange
+                    myStateVariables.setCurrentActorInCurrentAlbum(
+                        when(myStateVariables.getCurrentActorInCurrentAlbum()) {
+                            0 -> myStateVariables.getMaxActorsInCurrentAlbum() - 1
+                            else -> myStateVariables.getCurrentActorInCurrentAlbum() - 1
+                        }
+                    )
+                    myStateVariables.setCurrentActorInFullList(actorCategoryID.theIDs.get(myStateVariables.getCurrentAlbum()).get(myStateVariables.getCurrentActorInCurrentAlbum()))
+                },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .wrapContentSize()
+                    .weight(7f)
+            )
         }
     }  // Surface
 }  // ArtSpace2App
 
-val Section1: @Composable (
-    sangrahaList: MutableList<ContributionForm>,
+@Composable
+fun Section1(
+    actorChange: Boolean,
     actorsList: MutableList<Actor>,
-    actorCategoryID: ActorCategoryID,
-    modifier: Modifier) -> Unit =  { sangrahaList, actorsList, actorCategoryID, modifier ->
+    myStateVariables: MyStateVariables,
+    modifier: Modifier
+) {
     Surface(
         modifier = modifier
             .padding(28.dp)
     ) {
         Image(
-            painter = painterResource(id = R.drawable.rajkumar),
+            painter = painterResource(
+                id = actorsList.get(myStateVariables.getCurrentActorInFullList()).getImage()
+            ),
             contentDescription = null.toString(),
             modifier = modifier
                 .fillMaxHeight()
@@ -235,11 +310,13 @@ val Section1: @Composable (
     }
 }
 
-val Section2: @Composable (
-    sangrahaList: MutableList<ContributionForm>,
+@Composable
+fun Section2(
+    actorChange: Boolean,
     actorsList: MutableList<Actor>,
-    actorCategoryID: ActorCategoryID,
-    modifier: Modifier) -> Unit =  { sangrahaList, actorsList, actorCategoryID, modifier ->
+    myStateVariables: MyStateVariables,
+    modifier: Modifier
+) {
     Surface(
         modifier = modifier,
     ) {
@@ -251,7 +328,7 @@ val Section2: @Composable (
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = "ರಾಜ್ ಕುಮಾರ್",
+                text = actorsList.get(myStateVariables.getCurrentActorInFullList()).getNameKn(),
                 style = Typography.headlineMedium,
             )
             Column(
@@ -267,12 +344,13 @@ val Section2: @Composable (
                         .weight(8f)
                 ) {
                     val about = listOf(
-                        listOf("ಇತರೆ ಹೆಸರು: ", "ಸಿಂಗಾನಲ್ಲೂರು ಪುಟ್ಟಸ್ವಾಮಯ್ಯ ಮುತ್ತುರಾಜು, ಅಣ್ಣಾವ್ರು"),
-                        listOf("ಜನನ: ", "೨೪ ಏಪ್ರಿಲ್, ೧೯೨೯\nಗಾಜನೂರು, ಮೈಸೂರು ಸಂಸ್ಥಾನ, ಬ್ರಿಟಿಷ್ ಭಾರತ"),
-                        listOf("ಮರಣ: ", "12 ಏಪ್ರಿಲ್ 2006 (ವಯಸ್ಸು - 76)\nಬೆಂಗಳೂರು, ಕರ್ನಾಟಕ, ಭಾರತ"),
-                        listOf("ಕೊಡುಗೆ ರೂಪಗಳು: ", "ನಾಯಕ ನಟ, ಗಾಯಕ, ನಿರ್ಮಾಪಕ, ಸಹ ನಟ"),
-                        listOf("ಮೊದಲ ಚಿತ್ರ: ", "ಬೇಡರ ಕಣ್ಣಪ್ಪ"),
-                        listOf("ಬಿರುದುಗಳು: ", "ನಟಸಾರ್ವಭೌಮ, ಕರ್ನಾಟಕ ರತ್ನ, ವರನಟ,ಅಣ್ಣಾವ್ರು"),
+                        listOf(stringResource(R.string.otherNames), actorsList.get(myStateVariables.getCurrentActorInFullList()).getOtherNames()),
+                        listOf(stringResource(R.string.janana), actorsList.get(myStateVariables.getCurrentActorInFullList()).getBirth()),
+                        listOf(stringResource(R.string.marana), actorsList.get(myStateVariables.getCurrentActorInFullList()).getDeath()),
+//                        listOf(stringResource(R.string.kodugeRoopagalu), actorsList.get(myStateVariables.getCurrentActorInFullList()).getContributionForms()),
+                        listOf(stringResource(R.string.kodugeRoopagalu), "ಬಾಕಿ ಇದೆ"), //TODO(Actual implementation pending)
+                        listOf(stringResource(R.string.firstMovie), actorsList.get(myStateVariables.getCurrentActorInFullList()).getFirstKannadaMovie()),
+                        listOf(stringResource(R.string.birudugalu), actorsList.get(myStateVariables.getCurrentActorInFullList()).getTitles()),
                     )
                     LazyColumn() {
                         items(about.size) { index ->
@@ -325,7 +403,6 @@ fun SpecialLine(
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 2.dp)
-//            .border(width = 1.dp, color = Color.White)
             .height(8.dp),
         contentDescription = null.toString(),
     ) {
@@ -348,11 +425,15 @@ fun SpecialLine(
     }
 }
 
-val Section3: @Composable (
+@Composable
+fun Section3(
+    albumChange: Boolean,
     sangrahaList: MutableList<ContributionForm>,
-    actorsList: MutableList<Actor>,
-    actorCategoryID: ActorCategoryID,
-    modifier: Modifier) -> Unit =  { sangrahaList, actorsList, actorCategoryID, modifier ->
+    myStateVariables: MyStateVariables,
+    currentAlbumInc: () -> Unit,    // TODO: Will be used for swipe feature
+    currentAlbumDec: () -> Unit,    // TODO: Will be used for swipe feature
+    modifier: Modifier
+) {
     Surface(
         modifier = modifier
             .border(width = 2.dp, color = Color.Red)
@@ -364,17 +445,18 @@ val Section3: @Composable (
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Text(text = "ಸಂಗ್ರಹ: ", style = Typography.headlineSmall)
-            Text(text = "ನಾಯಕ ನಟ", style = Typography.headlineSmall)
+            Text(text = stringResource(R.string.sangrahaKn), style = Typography.headlineSmall)
+            Text(text = sangrahaList.get(myStateVariables.getCurrentAlbum()).getNameKn(), style = Typography.headlineSmall)
         }
     }
 }
 
-val Section4: @Composable (
-    sangrahaList: MutableList<ContributionForm>,
-    actorsList: MutableList<Actor>,
-    actorCategoryID: ActorCategoryID,
-    modifier: Modifier) -> Unit =  { sangrahaList, actorsList, actorCategoryID, modifier ->
+@Composable
+fun Section4(
+    currentActorInc: () -> Unit,
+    currentActorDec: () -> Unit,
+    modifier: Modifier
+){
     Surface(
         modifier = modifier
     ) {
@@ -384,13 +466,15 @@ val Section4: @Composable (
             verticalAlignment = Alignment.CenterVertically
         ) {
             btnsNextOrPrevious(
-                isNext = false,
+                text = R.string.prevKn,
+                onClickOp = currentActorDec,
                 modifier = Modifier
                     .weight(3f)
             )
             Spacer(modifier = Modifier.weight(4f))
             btnsNextOrPrevious(
-                isNext = true,
+                text = R.string.nextKn,
+                onClickOp = currentActorInc,
                 modifier = Modifier
                     .weight(3f)
             )
@@ -400,13 +484,13 @@ val Section4: @Composable (
 
 @Composable
 fun btnsNextOrPrevious(
-    isNext: Boolean,
+    @StringRes text: Int,
+    onClickOp: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val text = if(isNext) "ಮುಂದಿನ" else "ಹಿಂದಿನ"
     Button(
-        onClick = {},
-        modifier = Modifier
+        onClick = onClickOp,
+        modifier = modifier
             .padding(2.dp)
             .background(brush = Brush.verticalGradient(listOf(Color.Yellow, Color.Red))),
         colors = ButtonDefaults.buttonColors(
@@ -414,6 +498,6 @@ fun btnsNextOrPrevious(
             contentColor = Color.Red
         )
     ) {
-        Text(text = text)
+        Text(text = stringResource(id = text))
     }
 }
