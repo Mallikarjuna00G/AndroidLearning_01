@@ -164,6 +164,10 @@ class MyStateVariables(
     fun getCurrentActorInCurrentAlbum(): Int { return currentActorInCurrentAlbum }
 }
 
+
+// TODO: Support for different screen sizes
+// TODO: Support for landscape mode
+// TODO: Automation tests
 @Composable
 fun ArtSpace2App(
     sangrahaList: MutableList<ContributionForm>,
@@ -307,6 +311,7 @@ fun Section1(
                 ),
             contentScale = ContentScale.FillHeight
         )
+        // TODO: Show a tooltip for additional information upon a long button tap.
     }
 }
 
