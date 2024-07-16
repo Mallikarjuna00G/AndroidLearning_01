@@ -41,6 +41,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -101,13 +102,18 @@ fun WithTheme(sangrahaList: MutableList<ContributionForm>, actorsList: MutableLi
 fun TopAppBarDecoration(
     modifier: Modifier = Modifier
 ) {
-    Column{
+    Column(
+        modifier = modifier
+            .wrapContentSize()
+            .height(48.dp)
+    ) {
         TopAppBar(
             title = {
                 Text(
                     text = stringResource(R.string.theTitle),
                     modifier = Modifier
-                        .fillMaxWidth(),
+                        .fillMaxWidth()
+                        .wrapContentSize(),
                     textAlign = TextAlign.Center,
                     fontWeight = FontWeight.ExtraBold
                 )
@@ -117,6 +123,7 @@ fun TopAppBarDecoration(
                 titleContentColor = Color.Red,
             ),
             modifier = Modifier
+                .wrapContentSize()
         )  // TopAppBar
         Canvas(
             modifier = Modifier
@@ -166,7 +173,6 @@ class MyStateVariables(
 
 
 // TODO: Support for different screen sizes
-// TODO: Support for landscape mode
 // TODO: Automation tests
 @Composable
 fun ArtSpace2App(
@@ -202,81 +208,207 @@ fun ArtSpace2App(
             verticalArrangement = Arrangement.spacedBy(2.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Section1(
-                actorChange = actorChange,
-                actorsList = actorsList,
-                myStateVariables = myStateVariables,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .wrapContentSize()
-                    .weight(40f)
-            )
-            Section2(
-                actorChange = actorChange,
-                actorsList = actorsList,
-                myStateVariables = myStateVariables,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .wrapContentSize()
-                    .weight(35f)
-            )
-            Section3(
-                albumChange = albumChange,
-                sangrahaList = sangrahaList,
-                myStateVariables = myStateVariables,
-                currentAlbumInc = {
-                    albumChange = !albumChange
-                    myStateVariables.setCurrentAlbum(
-                        when(myStateVariables.getCurrentAlbum()) {
-                            myStateVariables.getMaxAlbums() - 1 -> 0
-                            else -> myStateVariables.getCurrentAlbum() + 1
-                        }
-                    )
-                    myStateVariables.setCurrentActorInCurrentAlbum(0)
-                    myStateVariables.setCurrentActorInFullList(actorCategoryID.theIDs.get(myStateVariables.getCurrentAlbum()).get(myStateVariables.getCurrentActorInCurrentAlbum()))
-                },
-                currentAlbumDec = {
-                    albumChange = !albumChange
-                    myStateVariables.setCurrentAlbum(
-                        when(myStateVariables.getCurrentAlbum()) {
-                            0 -> myStateVariables.getMaxAlbums() - 1
-                            else -> myStateVariables.getCurrentAlbum() - 1
-                        }
-                    )
-                    myStateVariables.setCurrentActorInCurrentAlbum(0)
-                    myStateVariables.setCurrentActorInFullList(actorCategoryID.theIDs.get(myStateVariables.getCurrentAlbum()).get(myStateVariables.getCurrentActorInCurrentAlbum()))
-                },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .wrapContentSize()
-                    .weight(5f)
-            )
-            Section4(
-                currentActorInc = {
-                    actorChange = !actorChange
-                    myStateVariables.setCurrentActorInCurrentAlbum(
-                        when(myStateVariables.getCurrentActorInCurrentAlbum()) {
-                            myStateVariables.getMaxActorsInCurrentAlbum() - 1 -> 0
-                            else -> myStateVariables.getCurrentActorInCurrentAlbum() + 1
-                        }
-                    )
-                    myStateVariables.setCurrentActorInFullList(actorCategoryID.theIDs.get(myStateVariables.getCurrentAlbum()).get(myStateVariables.getCurrentActorInCurrentAlbum()))
-                },
-                currentActorDec = {
-                    actorChange = !actorChange
-                    myStateVariables.setCurrentActorInCurrentAlbum(
-                        when(myStateVariables.getCurrentActorInCurrentAlbum()) {
-                            0 -> myStateVariables.getMaxActorsInCurrentAlbum() - 1
-                            else -> myStateVariables.getCurrentActorInCurrentAlbum() - 1
-                        }
-                    )
-                    myStateVariables.setCurrentActorInFullList(actorCategoryID.theIDs.get(myStateVariables.getCurrentAlbum()).get(myStateVariables.getCurrentActorInCurrentAlbum()))
-                },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .wrapContentSize()
-                    .weight(7f)
-            )
+            val deviceOrientation = LocalConfiguration.current.orientation
+
+            if (deviceOrientation in 0..1 ) { // Portrait
+                Section1(
+                    actorChange = actorChange,
+                    actorsList = actorsList,
+                    myStateVariables = myStateVariables,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .wrapContentSize()
+                        .weight(40f)
+                )
+                Section2(
+                    actorChange = actorChange,
+                    actorsList = actorsList,
+                    myStateVariables = myStateVariables,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .wrapContentSize()
+                        .weight(35f)
+                )
+                Section3(
+                    albumChange = albumChange,
+                    sangrahaList = sangrahaList,
+                    myStateVariables = myStateVariables,
+                    currentAlbumInc = {
+                        albumChange = !albumChange
+                        myStateVariables.setCurrentAlbum(
+                            when (myStateVariables.getCurrentAlbum()) {
+                                myStateVariables.getMaxAlbums() - 1 -> 0
+                                else -> myStateVariables.getCurrentAlbum() + 1
+                            }
+                        )
+                        myStateVariables.setCurrentActorInCurrentAlbum(0)
+                        myStateVariables.setCurrentActorInFullList(
+                            actorCategoryID.theIDs.get(
+                                myStateVariables.getCurrentAlbum()
+                            ).get(myStateVariables.getCurrentActorInCurrentAlbum())
+                        )
+                    },
+                    currentAlbumDec = {
+                        albumChange = !albumChange
+                        myStateVariables.setCurrentAlbum(
+                            when (myStateVariables.getCurrentAlbum()) {
+                                0 -> myStateVariables.getMaxAlbums() - 1
+                                else -> myStateVariables.getCurrentAlbum() - 1
+                            }
+                        )
+                        myStateVariables.setCurrentActorInCurrentAlbum(0)
+                        myStateVariables.setCurrentActorInFullList(
+                            actorCategoryID.theIDs.get(
+                                myStateVariables.getCurrentAlbum()
+                            ).get(myStateVariables.getCurrentActorInCurrentAlbum())
+                        )
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .wrapContentSize()
+                        .weight(5f)
+                )
+                Section4(
+                    currentActorInc = {
+                        actorChange = !actorChange
+                        myStateVariables.setCurrentActorInCurrentAlbum(
+                            when (myStateVariables.getCurrentActorInCurrentAlbum()) {
+                                myStateVariables.getMaxActorsInCurrentAlbum() - 1 -> 0
+                                else -> myStateVariables.getCurrentActorInCurrentAlbum() + 1
+                            }
+                        )
+                        myStateVariables.setCurrentActorInFullList(
+                            actorCategoryID.theIDs.get(
+                                myStateVariables.getCurrentAlbum()
+                            ).get(myStateVariables.getCurrentActorInCurrentAlbum())
+                        )
+                    },
+                    currentActorDec = {
+                        actorChange = !actorChange
+                        myStateVariables.setCurrentActorInCurrentAlbum(
+                            when (myStateVariables.getCurrentActorInCurrentAlbum()) {
+                                0 -> myStateVariables.getMaxActorsInCurrentAlbum() - 1
+                                else -> myStateVariables.getCurrentActorInCurrentAlbum() - 1
+                            }
+                        )
+                        myStateVariables.setCurrentActorInFullList(
+                            actorCategoryID.theIDs.get(
+                                myStateVariables.getCurrentAlbum()
+                            ).get(myStateVariables.getCurrentActorInCurrentAlbum())
+                        )
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .wrapContentSize()
+                        .weight(7f)
+                )  // Section4
+            } else { // Landscape
+                Row (
+                    modifier = Modifier
+                ) {
+                    Column(
+                        modifier = Modifier
+                            .weight(30f)
+                    ) {
+                        Section1(
+                            actorChange = actorChange,
+                            actorsList = actorsList,
+                            myStateVariables = myStateVariables,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .wrapContentSize()
+                        )
+                    }
+                    Column(
+                        modifier = Modifier
+                            .weight(70f),
+                        verticalArrangement = Arrangement.spacedBy(2.dp),
+                    ) {
+                        Section2(
+                            actorChange = actorChange,
+                            actorsList = actorsList,
+                            myStateVariables = myStateVariables,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .wrapContentSize()
+                                .weight(68f)
+                        )
+                        Section3(
+                            albumChange = albumChange,
+                            sangrahaList = sangrahaList,
+                            myStateVariables = myStateVariables,
+                            currentAlbumInc = {
+                                albumChange = !albumChange
+                                myStateVariables.setCurrentAlbum(
+                                    when (myStateVariables.getCurrentAlbum()) {
+                                        myStateVariables.getMaxAlbums() - 1 -> 0
+                                        else -> myStateVariables.getCurrentAlbum() + 1
+                                    }
+                                )
+                                myStateVariables.setCurrentActorInCurrentAlbum(0)
+                                myStateVariables.setCurrentActorInFullList(
+                                    actorCategoryID.theIDs.get(
+                                        myStateVariables.getCurrentAlbum()
+                                    ).get(myStateVariables.getCurrentActorInCurrentAlbum())
+                                )
+                            },
+                            currentAlbumDec = {
+                                albumChange = !albumChange
+                                myStateVariables.setCurrentAlbum(
+                                    when (myStateVariables.getCurrentAlbum()) {
+                                        0 -> myStateVariables.getMaxAlbums() - 1
+                                        else -> myStateVariables.getCurrentAlbum() - 1
+                                    }
+                                )
+                                myStateVariables.setCurrentActorInCurrentAlbum(0)
+                                myStateVariables.setCurrentActorInFullList(
+                                    actorCategoryID.theIDs.get(
+                                        myStateVariables.getCurrentAlbum()
+                                    ).get(myStateVariables.getCurrentActorInCurrentAlbum())
+                                )
+                            },
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .wrapContentSize()
+                                .weight(16f)
+                        )  // Section3
+                        Section4(
+                            currentActorInc = {
+                                actorChange = !actorChange
+                                myStateVariables.setCurrentActorInCurrentAlbum(
+                                    when (myStateVariables.getCurrentActorInCurrentAlbum()) {
+                                        myStateVariables.getMaxActorsInCurrentAlbum() - 1 -> 0
+                                        else -> myStateVariables.getCurrentActorInCurrentAlbum() + 1
+                                    }
+                                )
+                                myStateVariables.setCurrentActorInFullList(
+                                    actorCategoryID.theIDs.get(
+                                        myStateVariables.getCurrentAlbum()
+                                    ).get(myStateVariables.getCurrentActorInCurrentAlbum())
+                                )
+                            },
+                            currentActorDec = {
+                                actorChange = !actorChange
+                                myStateVariables.setCurrentActorInCurrentAlbum(
+                                    when (myStateVariables.getCurrentActorInCurrentAlbum()) {
+                                        0 -> myStateVariables.getMaxActorsInCurrentAlbum() - 1
+                                        else -> myStateVariables.getCurrentActorInCurrentAlbum() - 1
+                                    }
+                                )
+                                myStateVariables.setCurrentActorInFullList(
+                                    actorCategoryID.theIDs.get(
+                                        myStateVariables.getCurrentAlbum()
+                                    ).get(myStateVariables.getCurrentActorInCurrentAlbum())
+                                )
+                            },
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .wrapContentSize()
+                                .weight(16f)
+                        )  // Section4
+                    }
+                }
+            }
         }
     }  // Surface
 }  // ArtSpace2App
