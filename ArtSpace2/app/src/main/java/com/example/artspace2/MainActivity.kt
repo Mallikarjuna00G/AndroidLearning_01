@@ -51,7 +51,6 @@ import com.example.artspace2.ui.theme.ArtSpace2Theme
 import com.example.artspace2.ui.theme.Typography
 
 class MainActivity : ComponentActivity() {
-    @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 //        enableEdgeToEdge()
@@ -118,7 +117,7 @@ fun TopAppBarDecoration(
                     fontWeight = FontWeight.ExtraBold
                 )
             },
-            colors = TopAppBarDefaults.smallTopAppBarColors(
+            colors = TopAppBarDefaults.topAppBarColors(
                 containerColor = Color.Yellow,
                 titleContentColor = Color.Red,
             ),
@@ -181,7 +180,7 @@ fun ArtSpace2App(
     actorCategoryID: ActorCategoryID,
     modifier: Modifier = Modifier
 ) {
-    var myStateVariables by remember {
+    val myStateVariables by remember {
         mutableStateOf(
             MyStateVariables(
                 currentActorInFullList = 0,
@@ -195,7 +194,7 @@ fun ArtSpace2App(
     var albumChange by remember { mutableStateOf(false) }
     var actorChange by remember { mutableStateOf(false) }
 
-    myStateVariables.setMaxActorsInCurrentAlbum(actorCategoryID.theIDs.get(myStateVariables.getCurrentAlbum()).size)
+    myStateVariables.setMaxActorsInCurrentAlbum(actorCategoryID.theIDs[myStateVariables.getCurrentAlbum()].size)
 
     Surface(
         modifier = modifier
@@ -243,9 +242,7 @@ fun ArtSpace2App(
                         )
                         myStateVariables.setCurrentActorInCurrentAlbum(0)
                         myStateVariables.setCurrentActorInFullList(
-                            actorCategoryID.theIDs.get(
-                                myStateVariables.getCurrentAlbum()
-                            ).get(myStateVariables.getCurrentActorInCurrentAlbum())
+                            actorCategoryID.theIDs[myStateVariables.getCurrentAlbum()][myStateVariables.getCurrentActorInCurrentAlbum()]
                         )
                     },
                     currentAlbumDec = {
@@ -258,9 +255,7 @@ fun ArtSpace2App(
                         )
                         myStateVariables.setCurrentActorInCurrentAlbum(0)
                         myStateVariables.setCurrentActorInFullList(
-                            actorCategoryID.theIDs.get(
-                                myStateVariables.getCurrentAlbum()
-                            ).get(myStateVariables.getCurrentActorInCurrentAlbum())
+                            actorCategoryID.theIDs[myStateVariables.getCurrentAlbum()][myStateVariables.getCurrentActorInCurrentAlbum()]
                         )
                     },
                     modifier = Modifier
@@ -278,9 +273,7 @@ fun ArtSpace2App(
                             }
                         )
                         myStateVariables.setCurrentActorInFullList(
-                            actorCategoryID.theIDs.get(
-                                myStateVariables.getCurrentAlbum()
-                            ).get(myStateVariables.getCurrentActorInCurrentAlbum())
+                            actorCategoryID.theIDs[myStateVariables.getCurrentAlbum()][myStateVariables.getCurrentActorInCurrentAlbum()]
                         )
                     },
                     currentActorDec = {
@@ -292,9 +285,7 @@ fun ArtSpace2App(
                             }
                         )
                         myStateVariables.setCurrentActorInFullList(
-                            actorCategoryID.theIDs.get(
-                                myStateVariables.getCurrentAlbum()
-                            ).get(myStateVariables.getCurrentActorInCurrentAlbum())
+                            actorCategoryID.theIDs[myStateVariables.getCurrentAlbum()][myStateVariables.getCurrentActorInCurrentAlbum()]
                         )
                     },
                     modifier = Modifier
@@ -347,9 +338,7 @@ fun ArtSpace2App(
                                 )
                                 myStateVariables.setCurrentActorInCurrentAlbum(0)
                                 myStateVariables.setCurrentActorInFullList(
-                                    actorCategoryID.theIDs.get(
-                                        myStateVariables.getCurrentAlbum()
-                                    ).get(myStateVariables.getCurrentActorInCurrentAlbum())
+                                    actorCategoryID.theIDs[myStateVariables.getCurrentAlbum()][myStateVariables.getCurrentActorInCurrentAlbum()]
                                 )
                             },
                             currentAlbumDec = {
@@ -362,9 +351,7 @@ fun ArtSpace2App(
                                 )
                                 myStateVariables.setCurrentActorInCurrentAlbum(0)
                                 myStateVariables.setCurrentActorInFullList(
-                                    actorCategoryID.theIDs.get(
-                                        myStateVariables.getCurrentAlbum()
-                                    ).get(myStateVariables.getCurrentActorInCurrentAlbum())
+                                    actorCategoryID.theIDs[myStateVariables.getCurrentAlbum()][myStateVariables.getCurrentActorInCurrentAlbum()]
                                 )
                             },
                             modifier = Modifier
@@ -382,9 +369,7 @@ fun ArtSpace2App(
                                     }
                                 )
                                 myStateVariables.setCurrentActorInFullList(
-                                    actorCategoryID.theIDs.get(
-                                        myStateVariables.getCurrentAlbum()
-                                    ).get(myStateVariables.getCurrentActorInCurrentAlbum())
+                                    actorCategoryID.theIDs[myStateVariables.getCurrentAlbum()][myStateVariables.getCurrentActorInCurrentAlbum()]
                                 )
                             },
                             currentActorDec = {
@@ -396,9 +381,7 @@ fun ArtSpace2App(
                                     }
                                 )
                                 myStateVariables.setCurrentActorInFullList(
-                                    actorCategoryID.theIDs.get(
-                                        myStateVariables.getCurrentAlbum()
-                                    ).get(myStateVariables.getCurrentActorInCurrentAlbum())
+                                    actorCategoryID.theIDs[myStateVariables.getCurrentAlbum()][myStateVariables.getCurrentActorInCurrentAlbum()]
                                 )
                             },
                             modifier = Modifier
@@ -426,7 +409,7 @@ fun Section1(
     ) {
         Image(
             painter = painterResource(
-                id = actorsList.get(myStateVariables.getCurrentActorInFullList()).getImage()
+                id = actorsList[myStateVariables.getCurrentActorInFullList()].getImage()
             ),
             contentDescription = null.toString(),
             modifier = modifier
@@ -465,7 +448,7 @@ fun Section2(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = actorsList.get(myStateVariables.getCurrentActorInFullList()).getNameKn(),
+                text = actorsList[myStateVariables.getCurrentActorInFullList()].getNameKn(),
                 style = Typography.headlineMedium,
             )
             Column(
@@ -481,14 +464,14 @@ fun Section2(
                         .weight(8f)
                 ) {
                     val about = listOf(
-                        listOf(stringResource(R.string.otherNames), actorsList.get(myStateVariables.getCurrentActorInFullList()).getOtherNames()),
-                        listOf(stringResource(R.string.janana), actorsList.get(myStateVariables.getCurrentActorInFullList()).getBirth()),
-                        listOf(stringResource(R.string.marana), actorsList.get(myStateVariables.getCurrentActorInFullList()).getDeath()),
-                        listOf(stringResource(R.string.kodugeRoopagalu), actorsList.get(myStateVariables.getCurrentActorInFullList()).getContributionFormsAsOneString()),
-                        listOf(stringResource(R.string.firstMovie), actorsList.get(myStateVariables.getCurrentActorInFullList()).getFirstKannadaMovie()),
-                        listOf(stringResource(R.string.birudugalu), actorsList.get(myStateVariables.getCurrentActorInFullList()).getTitles()),
+                        listOf(stringResource(R.string.otherNames), actorsList[myStateVariables.getCurrentActorInFullList()].getOtherNames()),
+                        listOf(stringResource(R.string.janana), actorsList[myStateVariables.getCurrentActorInFullList()].getBirth()),
+                        listOf(stringResource(R.string.marana), actorsList[myStateVariables.getCurrentActorInFullList()].getDeath()),
+                        listOf(stringResource(R.string.kodugeRoopagalu), actorsList[myStateVariables.getCurrentActorInFullList()].getContributionFormsAsOneString()),
+                        listOf(stringResource(R.string.firstMovie), actorsList[myStateVariables.getCurrentActorInFullList()].getFirstKannadaMovie()),
+                        listOf(stringResource(R.string.birudugalu), actorsList[myStateVariables.getCurrentActorInFullList()].getTitles()),
                     )
-                    LazyColumn() {
+                    LazyColumn(modifier = Modifier) {
                         items(about.size) { index ->
                             Row(
                                 modifier = Modifier
@@ -517,7 +500,7 @@ fun Section2(
 @Composable
 fun SimpleLine(modifier: Modifier) {
     Canvas(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .padding(vertical = 2.dp),
         contentDescription = null.toString(),
@@ -536,7 +519,7 @@ fun SpecialLine(
     modifier: Modifier = Modifier
 ) {
     Canvas(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .padding(horizontal = 2.dp)
             .height(8.dp),
@@ -582,7 +565,7 @@ fun Section3(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(text = stringResource(R.string.sangrahaKn), style = Typography.headlineSmall)
-            Text(text = sangrahaList.get(myStateVariables.getCurrentAlbum()).getNameKn(), style = Typography.headlineSmall)
+            Text(text = sangrahaList[myStateVariables.getCurrentAlbum()].getNameKn(), style = Typography.headlineSmall)
         }
     }
 }
@@ -601,14 +584,14 @@ fun Section4(
             horizontalArrangement = Arrangement.SpaceEvenly,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            btnsNextOrPrevious(
+            BtnsNextOrPrevious(
                 text = R.string.prevKn,
                 onClickOp = currentActorDec,
                 modifier = Modifier
                     .weight(3f)
             )
             Spacer(modifier = Modifier.weight(4f))
-            btnsNextOrPrevious(
+            BtnsNextOrPrevious(
                 text = R.string.nextKn,
                 onClickOp = currentActorInc,
                 modifier = Modifier
@@ -619,7 +602,7 @@ fun Section4(
 }
 
 @Composable
-fun btnsNextOrPrevious(
+fun BtnsNextOrPrevious(
     @StringRes text: Int,
     onClickOp: () -> Unit,
     modifier: Modifier = Modifier
