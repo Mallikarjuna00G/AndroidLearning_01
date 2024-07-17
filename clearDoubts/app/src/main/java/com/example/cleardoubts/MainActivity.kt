@@ -58,7 +58,8 @@ fun theTheme(modifier: Modifier = Modifier) {
 //                name = "Android",
 //                modifier = Modifier.padding(innerPadding)
 //            )
-            LearnDeviceOrientation(modifier = Modifier.padding(innerPadding))
+//            LearnDeviceOrientation(modifier = Modifier.padding(innerPadding))
+            LearnSwiper(modifier = Modifier.padding(innerPadding))
         }
     }
 }
