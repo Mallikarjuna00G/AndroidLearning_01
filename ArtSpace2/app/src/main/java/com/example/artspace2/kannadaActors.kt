@@ -36,42 +36,42 @@ class Actor(
 
     fun contributionFormsUpdater(
         sangrahaList: MutableList<ContributionForm>,
-        is_naayakatva: Boolean = false,
-        is_gaayana: Boolean = false,
-        is_nirmaapane: Boolean = false,
-        is_sahaNirmaapane: Boolean = false,
-        is_nirdeshana: Boolean = false,
-        is_sahaNirdeshana: Boolean = false,
-        is_sahaNatane: Boolean = false,
-        is_haasyaNatane: Boolean = false,
-        is_khalanaayakatva: Boolean = false,
+        isNaayakatva: Boolean = false,
+        isGaayana: Boolean = false,
+        isNirmaapane: Boolean = false,
+        isSahaNirmaapane: Boolean = false,
+        isNirdeshana: Boolean = false,
+        isSahaNirdeshana: Boolean = false,
+        isSahaNatane: Boolean = false,
+        isHaasyaNatane: Boolean = false,
+        isKhalanaayakatva: Boolean = false,
     ) {
         for(sangraha in sangrahaList) {
-            if(is_naayakatva && sangraha.getNameEn() == "naayakatva") {
+            if(isNaayakatva && sangraha.getNameEn() == "naayakatva") {
                 contributionForms.add(sangraha)
             }
-            if(is_gaayana && sangraha.getNameEn() == "gaayana") {
+            if(isGaayana && sangraha.getNameEn() == "gaayana") {
                 contributionForms.add(sangraha)
             }
-            if(is_nirmaapane && sangraha.getNameEn() == "nirmaapane") {
+            if(isNirmaapane && sangraha.getNameEn() == "nirmaapane") {
                 contributionForms.add(sangraha)
             }
-            if(is_sahaNirmaapane && sangraha.getNameEn() == "sahaNirmaapane") {
+            if(isSahaNirmaapane && sangraha.getNameEn() == "sahaNirmaapane") {
                 contributionForms.add(sangraha)
             }
-            if(is_nirdeshana && sangraha.getNameEn() == "nirdeshana") {
+            if(isNirdeshana && sangraha.getNameEn() == "nirdeshana") {
                 contributionForms.add(sangraha)
             }
-            if(is_sahaNirdeshana && sangraha.getNameEn() == "sahaNirdeshana") {
+            if(isSahaNirdeshana && sangraha.getNameEn() == "sahaNirdeshana") {
                 contributionForms.add(sangraha)
             }
-            if(is_sahaNatane && sangraha.getNameEn() == "sahaNatane") {
+            if(isSahaNatane && sangraha.getNameEn() == "sahaNatane") {
                 contributionForms.add(sangraha)
             }
-            if(is_haasyaNatane && sangraha.getNameEn() == "haasyaNatane") {
+            if(isHaasyaNatane && sangraha.getNameEn() == "haasyaNatane") {
                 contributionForms.add(sangraha)
             }
-            if(is_khalanaayakatva && sangraha.getNameEn() == "khalanaayakatva") {
+            if(isKhalanaayakatva && sangraha.getNameEn() == "khalanaayakatva") {
                 contributionForms.add(sangraha)
             }
         }
@@ -86,7 +86,7 @@ class ContributionForm(
     fun getNameKn(): String { return nameKn }
 }
 
-class ActorCategoryID() {
+class ActorCategoryID {
     var theIDs: MutableList<MutableList<Int>> = mutableListOf(mutableListOf())
 }
 
@@ -116,11 +116,12 @@ fun updateActorCategoryID(
         for(category in actor.getContributionForms()) {
             for(sangraha in sangrahaList) {
                 if(category.getNameEn() == sangraha.getNameEn()) {
-                    actorCategoryID.theIDs.get(sangrahaList.indexOf(sangraha)).add(actorsList.indexOf(actor))
+                    actorCategoryID.theIDs[sangrahaList.indexOf(sangraha)].add(actorsList.indexOf(actor))
                 }
             }
         }
     }
+
 }
 
 fun updateSangrahaList(sangrahaList: MutableList<ContributionForm>) {
@@ -150,10 +151,10 @@ fun updateActorsList(actorsList: MutableList<Actor>, sangrahaList: MutableList<C
     ))
     actorsList[actorsList.size - 1].contributionFormsUpdater(
         sangrahaList,
-        is_naayakatva = true,
-        is_gaayana = true,
-        is_nirmaapane = true,
-        is_sahaNatane = true
+        isNaayakatva = true,
+        isGaayana = true,
+        isNirmaapane = true,
+        isSahaNatane = true
     )
     // --------------------------------------------------
     actorsList.add(Actor(
@@ -169,12 +170,12 @@ fun updateActorsList(actorsList: MutableList<Actor>, sangrahaList: MutableList<C
     ))
     actorsList[actorsList.size - 1].contributionFormsUpdater(
         sangrahaList,
-        is_naayakatva = true,
-        is_gaayana = true,
-        is_nirmaapane = true,
-        is_sahaNatane = true,
-        is_sahaNirdeshana = true,
-        is_khalanaayakatva = true
+        isNaayakatva = true,
+        isGaayana = true,
+        isNirmaapane = true,
+        isSahaNatane = true,
+        isSahaNirdeshana = true,
+        isKhalanaayakatva = true
     )
     // -------------------------------------------
     actorsList.add(Actor(
@@ -190,15 +191,15 @@ fun updateActorsList(actorsList: MutableList<Actor>, sangrahaList: MutableList<C
     ))
     actorsList[actorsList.size - 1].contributionFormsUpdater(
         sangrahaList,
-        is_naayakatva = true,
-        is_gaayana = false,
-        is_nirmaapane = true,
-        is_sahaNirmaapane = false,
-        is_nirdeshana = true,
-        is_sahaNirdeshana = false,
-        is_sahaNatane = true,
-        is_haasyaNatane = false,
-        is_khalanaayakatva = false
+        isNaayakatva = true,
+        isGaayana = false,
+        isNirmaapane = true,
+        isSahaNirmaapane = false,
+        isNirdeshana = true,
+        isSahaNirdeshana = false,
+        isSahaNatane = true,
+        isHaasyaNatane = false,
+        isKhalanaayakatva = false
     )
     // --------------------------------------
     actorsList.add(Actor(
@@ -214,15 +215,15 @@ fun updateActorsList(actorsList: MutableList<Actor>, sangrahaList: MutableList<C
     ))
     actorsList[actorsList.size - 1].contributionFormsUpdater(
         sangrahaList,
-        is_naayakatva = true,
-        is_gaayana = false,
-        is_nirmaapane = false,
-        is_sahaNirmaapane = false,
-        is_nirdeshana = false,
-        is_sahaNirdeshana = false,
-        is_sahaNatane = true,
-        is_haasyaNatane = false,
-        is_khalanaayakatva = false
+        isNaayakatva = true,
+        isGaayana = false,
+        isNirmaapane = false,
+        isSahaNirmaapane = false,
+        isNirdeshana = false,
+        isSahaNirdeshana = false,
+        isSahaNatane = true,
+        isHaasyaNatane = false,
+        isKhalanaayakatva = false
     )
     // --------------------------------------
     actorsList.add(Actor(
@@ -238,15 +239,15 @@ fun updateActorsList(actorsList: MutableList<Actor>, sangrahaList: MutableList<C
     ))
     actorsList[actorsList.size - 1].contributionFormsUpdater(
         sangrahaList,
-        is_naayakatva = true,
-        is_gaayana = false,
-        is_nirmaapane = false,
-        is_sahaNirmaapane = false,
-        is_nirdeshana = false,
-        is_sahaNirdeshana = false,
-        is_sahaNatane = true,
-        is_haasyaNatane = false,
-        is_khalanaayakatva = false
+        isNaayakatva = true,
+        isGaayana = false,
+        isNirmaapane = false,
+        isSahaNirmaapane = false,
+        isNirdeshana = false,
+        isSahaNirdeshana = false,
+        isSahaNatane = true,
+        isHaasyaNatane = false,
+        isKhalanaayakatva = false
     )
     // --------------------------------------
     actorsList.add(Actor(
@@ -262,15 +263,15 @@ fun updateActorsList(actorsList: MutableList<Actor>, sangrahaList: MutableList<C
     ))
     actorsList[actorsList.size - 1].contributionFormsUpdater(
         sangrahaList,
-        is_naayakatva = true,
-        is_gaayana = false,
-        is_nirmaapane = false,
-        is_sahaNirmaapane = false,
-        is_nirdeshana = true,
-        is_sahaNirdeshana = false,
-        is_sahaNatane = false,
-        is_haasyaNatane = false,
-        is_khalanaayakatva = false
+        isNaayakatva = true,
+        isGaayana = false,
+        isNirmaapane = false,
+        isSahaNirmaapane = false,
+        isNirdeshana = true,
+        isSahaNirdeshana = false,
+        isSahaNatane = false,
+        isHaasyaNatane = false,
+        isKhalanaayakatva = false
     )
     // --------------------------------------
     actorsList.add(Actor(
@@ -286,15 +287,15 @@ fun updateActorsList(actorsList: MutableList<Actor>, sangrahaList: MutableList<C
     ))
     actorsList[actorsList.size - 1].contributionFormsUpdater(
         sangrahaList,
-        is_naayakatva = false,
-        is_gaayana = false,
-        is_nirmaapane = false,
-        is_sahaNirmaapane = false,
-        is_nirdeshana = false,
-        is_sahaNirdeshana = false,
-        is_sahaNatane = false,
-        is_haasyaNatane = false,
-        is_khalanaayakatva = true
+        isNaayakatva = false,
+        isGaayana = false,
+        isNirmaapane = false,
+        isSahaNirmaapane = false,
+        isNirdeshana = false,
+        isSahaNirdeshana = false,
+        isSahaNatane = false,
+        isHaasyaNatane = false,
+        isKhalanaayakatva = true
     )
     // --------------------------------------
     actorsList.add(Actor(
@@ -310,15 +311,15 @@ fun updateActorsList(actorsList: MutableList<Actor>, sangrahaList: MutableList<C
     ))
     actorsList[actorsList.size - 1].contributionFormsUpdater(
         sangrahaList,
-        is_naayakatva = false,
-        is_gaayana = false,
-        is_nirmaapane = false,
-        is_sahaNirmaapane = false,
-        is_nirdeshana = false,
-        is_sahaNirdeshana = false,
-        is_sahaNatane = true,
-        is_haasyaNatane = false,
-        is_khalanaayakatva = true
+        isNaayakatva = false,
+        isGaayana = false,
+        isNirmaapane = false,
+        isSahaNirmaapane = false,
+        isNirdeshana = false,
+        isSahaNirdeshana = false,
+        isSahaNatane = true,
+        isHaasyaNatane = false,
+        isKhalanaayakatva = true
     )
     // --------------------------------------
     actorsList.add(Actor(
@@ -334,15 +335,15 @@ fun updateActorsList(actorsList: MutableList<Actor>, sangrahaList: MutableList<C
     ))
     actorsList[actorsList.size - 1].contributionFormsUpdater(
         sangrahaList,
-        is_naayakatva = true,
-        is_gaayana = false,
-        is_nirmaapane = true,
-        is_sahaNirmaapane = false,
-        is_nirdeshana = true,
-        is_sahaNirdeshana = false,
-        is_sahaNatane = true,
-        is_haasyaNatane = false,
-        is_khalanaayakatva = true
+        isNaayakatva = true,
+        isGaayana = false,
+        isNirmaapane = true,
+        isSahaNirmaapane = false,
+        isNirdeshana = true,
+        isSahaNirdeshana = false,
+        isSahaNatane = true,
+        isHaasyaNatane = false,
+        isKhalanaayakatva = true
     )
     // --------------------------------------
     actorsList.add(Actor(
@@ -358,15 +359,15 @@ fun updateActorsList(actorsList: MutableList<Actor>, sangrahaList: MutableList<C
     ))
     actorsList[actorsList.size - 1].contributionFormsUpdater(
         sangrahaList,
-        is_naayakatva = true,
-        is_gaayana = true,
-        is_nirmaapane = true,
-        is_sahaNirmaapane = false,
-        is_nirdeshana = true,
-        is_sahaNirdeshana = false,
-        is_sahaNatane = true,
-        is_haasyaNatane = true,
-        is_khalanaayakatva = false
+        isNaayakatva = true,
+        isGaayana = true,
+        isNirmaapane = true,
+        isSahaNirmaapane = false,
+        isNirdeshana = true,
+        isSahaNirdeshana = false,
+        isSahaNatane = true,
+        isHaasyaNatane = true,
+        isKhalanaayakatva = false
     )
     // --------------------------------------
     actorsList.add(Actor(
@@ -382,15 +383,15 @@ fun updateActorsList(actorsList: MutableList<Actor>, sangrahaList: MutableList<C
     ))
     actorsList[actorsList.size - 1].contributionFormsUpdater(
         sangrahaList,
-        is_naayakatva = false,
-        is_gaayana = false,
-        is_nirmaapane = false,
-        is_sahaNirmaapane = false,
-        is_nirdeshana = false,
-        is_sahaNirdeshana = false,
-        is_sahaNatane = true,
-        is_haasyaNatane = true,
-        is_khalanaayakatva = true
+        isNaayakatva = false,
+        isGaayana = false,
+        isNirmaapane = false,
+        isSahaNirmaapane = false,
+        isNirdeshana = false,
+        isSahaNirdeshana = false,
+        isSahaNatane = true,
+        isHaasyaNatane = true,
+        isKhalanaayakatva = true
     )
     // --------------------------------------
     actorsList.add(Actor(
@@ -406,15 +407,15 @@ fun updateActorsList(actorsList: MutableList<Actor>, sangrahaList: MutableList<C
     ))
     actorsList[actorsList.size - 1].contributionFormsUpdater(
         sangrahaList,
-        is_naayakatva = false,
-        is_gaayana = false,
-        is_nirmaapane = false,
-        is_sahaNirmaapane = false,
-        is_nirdeshana = false,
-        is_sahaNirdeshana = false,
-        is_sahaNatane = true,
-        is_haasyaNatane = true,
-        is_khalanaayakatva = true
+        isNaayakatva = false,
+        isGaayana = false,
+        isNirmaapane = false,
+        isSahaNirmaapane = false,
+        isNirdeshana = false,
+        isSahaNirdeshana = false,
+        isSahaNatane = true,
+        isHaasyaNatane = true,
+        isKhalanaayakatva = true
     )
     // --------------------------------------
 }
