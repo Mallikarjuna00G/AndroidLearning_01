@@ -4,6 +4,8 @@ Learning android development from [Android Basics with Compose](https://develope
 
 Project: [clearDoubts](./clearDoubts)
 - Learning custom theming: Dark theme. `MaterialTheme` shall be inside the `ClearDoubtsTheme`.
+- Learning orientation of the device
+- Learning swipe actions using drag gesture detections. Also controlling the background color while dragging.
 
 ## Unit 1: Your first Android app
 
