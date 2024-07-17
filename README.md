@@ -6,6 +6,7 @@ Project: [clearDoubts](./clearDoubts)
 - Learning custom theming: Dark theme. `MaterialTheme` shall be inside the `ClearDoubtsTheme`.
 - Learning orientation of the device
 - Learning swipe actions using drag gesture detections. Also controlling the background color while dragging.
+- Learning longTap gesture for tool tips.
 
 ## Unit 1: Your first Android app
 

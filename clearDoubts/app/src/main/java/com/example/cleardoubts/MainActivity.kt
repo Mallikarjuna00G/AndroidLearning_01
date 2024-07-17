@@ -59,7 +59,8 @@ fun theTheme(modifier: Modifier = Modifier) {
 //                modifier = Modifier.padding(innerPadding)
 //            )
 //            LearnDeviceOrientation(modifier = Modifier.padding(innerPadding))
-            LearnSwiper(modifier = Modifier.padding(innerPadding))
+//            LearnSwiper(modifier = Modifier.padding(innerPadding))
+            Tooltip(modifier.padding(innerPadding))
         }
     }
 }
