@@ -9,9 +9,11 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.gestures.detectHorizontalDragGestures
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -19,6 +21,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Button
@@ -375,26 +378,60 @@ fun Section1(
         modifier = modifier
             .padding(28.dp)
     ) {
-        Image(
-            painter = painterResource(
-                id = actorsList[myStateVariables.getCurrentActorInFullList()].getImage()
-            ),
-            contentDescription = null.toString(),
-            modifier = modifier
-                .fillMaxHeight()
-                .border(
-                    width = 8.dp,
-                    shape = RectangleShape,
-                    brush = Brush.verticalGradient(
-                        listOf(
-                            Color.Yellow,
-                            Color.Red,
-                        )
+        var toolTipState by remember { mutableStateOf(false) }
+
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .pointerInput(Unit) {
+                    detectTapGestures(
+                        onLongPress = {
+                            toolTipState = true
+                        },
+                        onTap = {
+                            toolTipState = false
+                        }
                     )
+                },
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Image(
+                painter = painterResource(
+                    id = actorsList[myStateVariables.getCurrentActorInFullList()].getImage()
                 ),
-            contentScale = ContentScale.FillHeight
-        )
-        // TODO: Show a tooltip for additional information upon a long button tap.
+                contentDescription = null.toString(),
+                modifier = modifier
+                    .fillMaxHeight()
+                    .weight(88f)
+                    .border(
+                        width = 8.dp,
+                        shape = RectangleShape,
+                        brush = Brush.verticalGradient(
+                            listOf(
+                                Color.Yellow,
+                                Color.Red,
+                            )
+                        )
+                    ),
+                contentScale = ContentScale.FillHeight
+            )
+            if(toolTipState) {
+                Box(
+                    contentAlignment = Alignment.Center,
+                    modifier = Modifier
+                        .weight(12f)
+                        .fillMaxWidth(),
+                ) {
+                    Text(
+                        text = "ಹೆಚ್ಚಿನ ಮಾಹಿತಿಗಾಗಿ ಅಂತರ್ಜಾಲದಲ್ಲಿ ಹುಡುಕಿ",
+                        modifier = Modifier,
+                        textAlign = TextAlign.Center,
+                        fontSize = Typography.bodySmall.fontSize
+                    )
+                }
+            }
+        }
     }
 }
 
