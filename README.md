@@ -26,7 +26,10 @@ Learning android development from [Android Basics with Compose](https://develope
 
 **Name:** [Happy Birthday](./HappyBirthday/)
 
-
 #### Project
 
 **Name:** [Compose Article](./ComposeArticle/)
+
+#### Project
+
+**Name:** [Task Manager](./TaskManager/)
