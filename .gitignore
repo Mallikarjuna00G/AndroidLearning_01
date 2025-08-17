@@ -1,1 +1,47 @@
+# ===============================================
+# IDE / System Files
+# ===============================================
+# IntelliJ / Android Studio
+.idea/
+*.iml
 **/deploymentTargetSelector.xml
+
+# macOS
+.DS_Store
+
+# ===============================================
+# Gradle / Build
+# ===============================================
+# Gradle cache
+.gradle/
+
+# Build directory
+build/
+
+# Build artifacts
+*.apk
+*.aab
+*.ap_
+*.dex
+*.class
+
+# Other generated files
+captures/
+.cxx/
+*.log
+*.hprof
+
+# ===============================================
+# Local & Sensitive Configuration
+# (NEVER commit these files)
+# ===============================================
+# Local configuration file (sdk path, etc).
+local.properties
+
+# Keystore files.
+*.jks
+*.keystore
+
+# Google Services (e.g. APIs or Firebase)
+# This file contains private API keys.
+google-services.json
