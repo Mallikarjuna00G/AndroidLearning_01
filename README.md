@@ -33,3 +33,7 @@ Learning android development from [Android Basics with Compose](https://develope
 #### Project
 
 **Name:** [Task Manager](./TaskManager/)
+
+#### Project
+
+**Name:** [Compose Quadrant](./ComposeQuadrant/)
