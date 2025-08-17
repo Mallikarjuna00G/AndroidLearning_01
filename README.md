@@ -57,3 +57,7 @@ Learning android development from [Android Basics with Compose](https://develope
 #### Project
 
 **Name:** [Dice Roller](./DiceRoller/)
+
+#### Project
+
+**Name:** [Lemonade](./Lemonade/)
