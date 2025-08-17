@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Business Card</string>
+    <string name="candidateName">Mallikarjuna00G</string>
+    <string name="candidatePosition">Android Developer</string>
+    <string name="phoneNumber">+91 9753186420</string>
+    <string name="socialMedia">\@Mallikarjuna00G</string>
+    <string name="email">m00g@android.com</string>
+</resources>

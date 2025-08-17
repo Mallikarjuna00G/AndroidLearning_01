@@ -37,3 +37,7 @@ Learning android development from [Android Basics with Compose](https://develope
 #### Project
 
 **Name:** [Compose Quadrant](./ComposeQuadrant/)
+
+#### Project
+
+**Name:** [Business Card](./BusinessCard/)
