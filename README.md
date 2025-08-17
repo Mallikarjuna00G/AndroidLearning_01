@@ -17,3 +17,11 @@ Learning android development from [Android Basics with Compose](https://develope
 #### Project
 
 **Name:** [Greeting Card](./GreetingCard/)
+
+### Build a basic layout
+
+[Link](https://developer.android.com/courses/pathways/android-basics-compose-unit-1-pathway-3)
+
+#### Project
+
+**Name:** [Happy Birthday](./HappyBirthday/)
