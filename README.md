@@ -41,3 +41,19 @@ Learning android development from [Android Basics with Compose](https://develope
 #### Project
 
 **Name:** [Business Card](./BusinessCard/)
+
+## Unit 2: Building app UI
+
+[Link](https://developer.android.com/courses/android-basics-compose/unit-2)
+
+### Kotlin fundamentals
+
+[Link](https://developer.android.com/courses/pathways/android-basics-compose-unit-2-pathway-1)
+
+### Add a button to an app
+
+[Link](https://developer.android.com/courses/pathways/android-basics-compose-unit-2-pathway-2)
+
+#### Project
+
+**Name:** [Dice Roller](./DiceRoller/)
