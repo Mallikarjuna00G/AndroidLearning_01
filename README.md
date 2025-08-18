@@ -61,3 +61,11 @@ Learning android development from [Android Basics with Compose](https://develope
 #### Project
 
 **Name:** [Lemonade](./Lemonade/)
+
+### Interacting with UI and state
+
+[Link](https://developer.android.com/courses/pathways/android-basics-compose-unit-2-pathway-3)
+
+#### Project
+
+**Name:** [Tip Time](./TipTime/)
